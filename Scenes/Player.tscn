@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/player/PlayerAnimation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Assets/light3.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.87006
+
+[sub_resource type="Animation" id=4]
+resource_name = "LitTorchAnimation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.4, 0.4 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "TorchLightAnimations"
+length = 2.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1.8 ),
+"transitions": PoolRealArray( 2, -0.5, -2 ),
+"update": 0,
+"values": [ 1.0, 0.85, 1.1 ]
+}
+
+[sub_resource type="OccluderPolygon2D" id=2]
+resource_local_to_scene = true
+resource_name = "Player"
+cull_mode = 1
+polygon = PoolVector2Array( 4.64323, 16.0559, 8.44392, 6.68675, 7.02971, -12.8471, 4.02451, -16.2942, -4.01883, -16.2058, -7.37759, -12.8471, -8.17309, 6.86353, -5.07949, 15.9675 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "walk"
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 15.554 )
+scale = Vector2( 1, 0.3 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 5.57182, -0.310131 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+color = Color( 0.635294, 0.713726, 0.0901961, 1 )
+range_item_cull_mask = 14
+shadow_gradient_length = 10.0
+shadow_filter = 2
+shadow_filter_smooth = 64.0
+shadow_item_cull_mask = -2147483564
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/LitTorchAnimation = SubResource( 4 )
+anims/TorchLightAnimations = SubResource( 3 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+light_mask = -2147483584
+occluder = SubResource( 2 )
+light_mask = -2147483584
