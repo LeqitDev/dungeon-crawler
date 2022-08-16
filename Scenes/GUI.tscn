@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
+[ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
+
+[node name="Control" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1216.0
+margin_bottom = 640.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Control"]
+margin_left = 1183.32
+margin_top = 186.291
+margin_right = 1215.32
+margin_bottom = 218.291
+texture_normal = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.74902, 0.74902, 0.74902, 1 )
+[connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]

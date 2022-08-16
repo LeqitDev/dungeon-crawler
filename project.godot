@@ -8,21 +8,27 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "GUI",
+"language": "GDScript",
+"path": "res://Scripts/GUI.gd"
+} ]
 _global_script_class_icons={
-
+"GUI": ""
 }
 
 [application]
 
 config/name="DungeonCrawler"
-run/main_scene="res://Scenes/MainScene.tscn"
+run/main_scene="res://Scenes/MainGame.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=1216
 window/size/height=640
+window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
 [input]

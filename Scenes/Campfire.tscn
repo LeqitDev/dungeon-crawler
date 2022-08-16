@@ -6,46 +6,46 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 32, 32 )
+region = Rect2( 0, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 32, 32 )
+region = Rect2( 32, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 288, 32, 32 )
+region = Rect2( 64, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 288, 32, 32 )
+region = Rect2( 96, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 288, 32, 32 )
+region = Rect2( 128, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 288, 32, 32 )
+region = Rect2( 160, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 160, 288, 32, 32 )
+region = Rect2( 192, 288, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 288, 32, 32 )
+region = Rect2( 0, 256, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "unlit",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "lit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "unlit",
 "speed": 5.0
 } ]
 
@@ -59,7 +59,7 @@ extents = Vector2( 16.0199, 7.15609 )
 resource_name = "LitCampfireAnimation"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Light2D:scale")
+tracks/0/path = NodePath("Light2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -76,7 +76,7 @@ resource_name = "LitIdleCampfireAnimation"
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Light2D:texture_scale")
+tracks/0/path = NodePath("Light2D:texture_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -100,26 +100,26 @@ animation = "unlit"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Campfire" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Campfire"]
 position = Vector2( 0, 8.873 )
 shape = SubResource( 11 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/LitCampfireAnimation = SubResource( 12 )
-anims/LitIdleCampfireAnimation = SubResource( 13 )
-
-[node name="Light2D" type="Light2D" parent="AnimationPlayer"]
+[node name="Light2D" type="Light2D" parent="."]
 scale = Vector2( 1e-05, 1e-05 )
 enabled = false
 texture = ExtResource( 3 )
-color = Color( 0.662745, 0.701961, 0.137255, 1 )
-range_item_cull_mask = 46
+color = Color( 0.882353, 0.721569, 0.454902, 1 )
+range_item_cull_mask = 42
 shadow_enabled = true
 shadow_gradient_length = 20.0
 shadow_filter = 2
 shadow_filter_smooth = 64.0
-shadow_item_cull_mask = 86
+shadow_item_cull_mask = -2147483562
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/LitCampfireAnimation = SubResource( 12 )
+anims/LitIdleCampfireAnimation = SubResource( 13 )
 [connection signal="body_entered" from="." to="." method="_on_Campfire_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Campfire_body_exited"]
