@@ -9,7 +9,7 @@
 [node name="Room" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 532.602, 434.372 )
+position = Vector2( 533, 430 )
 speed = 150
 
 [node name="Control" parent="." instance=ExtResource( 2 )]
