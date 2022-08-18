@@ -1,12 +1,16 @@
 extends KinematicBody2D
-
 signal collision
 
 export var speed = 400
 var screen_size
 
+
+var BuschGefunden = false
+
 var inside_area = []
+
 onready var gui = get_parent().get_node("Control/Control")
+onready var tilemap = get_parent().get_node("Room/Enviroment/CampfireOthers")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +23,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var interact_signal = 0
+	var fixed_pos = Vector2(position.x, position.y+32)
 	
 	var pos = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
@@ -49,7 +54,7 @@ func _process(delta):
 			var collision_position = collision.position - collision.normal
 			var tile_pos = Vector2(int(collision_position.x / 32), int(collision_position.y / 32))
 			var tile_id = tilemap.get_cellv(tile_pos)
-	
+
 	if has_area2d_object("GroundWall"):
 		var tilemap = get_area2d_object("GroundWall") as TileMap
 		
@@ -57,7 +62,7 @@ func _process(delta):
 		
 		for x in range(-1, 2):
 			for y in range(-1, 2):
-				var tile_pos_wrld = Vector2(position.x + x * 32, position.y + y * 32)
+				var tile_pos_wrld = Vector2(fixed_pos.x + x * 32, fixed_pos.y + y * 32)
 				
 				var tile_pos = tilemap.world_to_map(tile_pos_wrld)
 				var tile = tilemap.get_cellv(tile_pos)
@@ -79,7 +84,7 @@ func _process(delta):
 		
 		for x in range(-1, 2):
 			for y in range(-1, 2):
-				var tile_pos_wrld = Vector2(position.x + x * 32, position.y + y * 32)
+				var tile_pos_wrld = Vector2(fixed_pos.x + x * 32, fixed_pos.y + y * 32)
 				
 				var tile_pos = tilemap.world_to_map(tile_pos_wrld)
 				var tile = tilemap.get_cellv(tile_pos)
@@ -89,17 +94,24 @@ func _process(delta):
 					if Input.is_action_just_pressed("ui_interact"):
 						tilemap.set_cellv(tile_pos, MyTileSet.campfire_lit)
 						get_parent().get_node("Room/Campfire").emit_signal("play_lit_animation", tilemap.map_to_world(tile_pos))
+				
+				if tile == 35:
+					interact_signal += 1
+					BuschGefunden = true
+					break
+			
+			if BuschGefunden == true:
+				BuschGefunden = false
+				break 
 	
 	gui.emit_signal("key_popup", "E", self.position, interact_signal > 0)
-
-func _on_Player_body_entered(body):
-	emit_signal("collision")
-	if body is TileMap:
-		body.get_cell()
 
 func _on_Area2D_body_entered(body):
 	if !inside_area.has(body) and body != self:
 		inside_area.append(body)
+
+func _on_Area2D_body_exited(body):
+	inside_area.remove(inside_area.find(body))
 
 func get_area2d_object(name):
 	for obstacle in inside_area:
@@ -112,12 +124,3 @@ func has_area2d_object(name):
 		if obstacle.name == name:
 			return true
 	return false
-
-func _on_Area2D_body_exited(body):
-	inside_area.remove(inside_area.find(body))
-	
-#	if body.name == "Campfire":
-#		gui.emit_signal("key_popup", "E", self.position, false)
-#
-#	if body.name == "GroundWall":
-#		gui.emit_signal("key_popup", "E", self.position, false)

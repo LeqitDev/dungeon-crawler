@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
+[ext_resource path="res://Assets/gui/hearts/heart-full.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Health.gd" type="Script" id=4]
 
 [node name="Control" type="CanvasLayer"]
 
@@ -9,9 +11,6 @@
 margin_right = 1216.0
 margin_bottom = 640.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureButton" type="TextureButton" parent="Control"]
 margin_left = 1183.32
@@ -19,10 +18,45 @@ margin_top = 186.291
 margin_right = 1215.32
 margin_bottom = 218.291
 texture_normal = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.74902, 0.74902, 0.74902, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 187.0
+margin_bottom = 39.0
+custom_constants/separation = 5
+script = ExtResource( 4 )
+
+[node name="1" type="TextureRect" parent="HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="2" type="TextureRect" parent="HBoxContainer"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="3" type="TextureRect" parent="HBoxContainer"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="4" type="TextureRect" parent="HBoxContainer"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="5" type="TextureRect" parent="HBoxContainer"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
 [connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]

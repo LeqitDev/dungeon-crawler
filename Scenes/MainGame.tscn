@@ -10,6 +10,6 @@ script = ExtResource( 4 )
 [node name="Control" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 590.104, 545.836 )
+position = Vector2( 533, 430 )
 speed = 150
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]

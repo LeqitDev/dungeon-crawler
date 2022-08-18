@@ -49,6 +49,10 @@ window/size/height=640
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
+[global]
+
+Scenes=false
+
 [input]
 
 ui_left={
@@ -119,6 +123,7 @@ ui_kp_down={
 
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
+2d/snapping/use_gpu_pixel_snap=true
 
 [world]
 
