@@ -1,5 +1,7 @@
 extends Node
 
+class_name MyTileSet
+
 const berrybush = 36
 const berrybush_empty = 35
 const blue_flower = 45
@@ -53,6 +55,8 @@ const upper_right_root = 1
 const v_path = 13
 const v_right_path = 18
 const white_flower = 44
+
+const highway_group = [left_highway, upper_highway, right_highway, lower_highway]
 
 func getTilesList(tile_map:TileMap) -> Dictionary:
 	var tiles = {}

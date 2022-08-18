@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/tilesets/main_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://MainScene.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/MainScene.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Enviroment.gd" type="Script" id=5]
 
@@ -39,12 +38,6 @@ tile_data = PoolIntArray( 1179666, 9, 0 )
 [node name="Campfire" parent="." instance=ExtResource( 4 )]
 x = 19
 y = 11
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-visible = false
-light_mask = 32
-position = Vector2( 588.276, 536.413 )
-speed = 200
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )

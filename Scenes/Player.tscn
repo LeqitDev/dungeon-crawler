@@ -4,8 +4,9 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light3.png" type="Texture" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 8.87006
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.80445
+height = 22.8778
 
 [sub_resource type="Animation" id=2]
 resource_name = "LitTorchAnimation"
@@ -43,16 +44,13 @@ tracks/0/keys = {
 [sub_resource type="OccluderPolygon2D" id=4]
 resource_local_to_scene = true
 cull_mode = 1
-polygon = PoolVector2Array( 4.64323, 16.0559, 8.44392, 6.68675, 7.02971, -12.8471, 4.02451, -16.2942, -4.01883, -16.2058, -7.37759, -12.8471, -8.17309, 6.86353, -5.07949, 15.9675 )
+polygon = PoolVector2Array( 4.00781, 15.9914, 4.01563, 15, 5, 15, 5.02344, 8.00781, 6.99219, 8.00781, 7, 7.01563, 7.99219, 7, 8.04196, -0.950961, 7.02107, -0.993765, 7.01123, -2.00761, 6.00723, -2.00761, 6.02692, -2.99192, 2.99523, -3.01161, 2.97555, -4.99992, 3.98939, -4.99992, 4.00908, -5.98423, 4.99339, -5.99407, 5.00323, -6.98823, 5.98755, -7.00792, 6.00723, -8.01192, 7.01123, -8.01192, 6.99406, -12.9608, 6.00781, -13.0078, 6.00781, -13.9922, 5.02344, -14, 5.00781, -14.9922, 4.00781, -15.0156, 4.01563, -16.0234, -3.99695, -16.0204, -4.01553, -14.9984, -4.98176, -14.9891, -5.00034, -13.995, -5.99444, -14.0043, -6.01303, -13.0102, -6.98855, -12.9824, -7.00781, -8.00781, -6, -8, -6, -6.99219, -5.00781, -7.00781, -5.01563, -6, -4.00781, -5.99219, -3.99219, -5, -3, -5.01563, -3.00781, -2.99219, -5.98438, -2.98438, -6, -2, -6.98438, -1.99219, -7, -1, -7.99219, -0.984375, -8.01563, 7, -7.01563, 7.00781, -7.00781, 8.00781, -5.02344, 8.00781, -4.98438, 15, -4.00781, 15, -3.99219, 15.9609, -0.992188, 15.9766, -0.976563, 15, 1, 15, 1.02344, 15.9922 )
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 29.2667
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 32
@@ -60,18 +58,18 @@ frames = ExtResource( 1 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 14.5 )
-scale = Vector2( 1, 0.4 )
+position = Vector2( 0, 12.5 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.4 )
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 5.57182, -0.310131 )
+position = Vector2( 0.0758562, -0.0452652 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 3 )
 color = Color( 0.882353, 0.721569, 0.454902, 1 )
 energy = 0.85
 range_item_cull_mask = 42
-shadow_enabled = true
 shadow_gradient_length = 10.0
 shadow_filter = 5
 shadow_filter_smooth = 64.0

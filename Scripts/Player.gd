@@ -6,7 +6,7 @@ export var speed = 400
 var screen_size
 
 var inside_area = []
-onready var gui = get_tree().root.get_child(0).get_node("Control/Control")
+onready var gui = get_parent().get_node("Control/Control")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +18,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var interact_signal = 0
 	
 	var pos = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
@@ -49,27 +50,74 @@ func _process(delta):
 			var tile_pos = Vector2(int(collision_position.x / 32), int(collision_position.y / 32))
 			var tile_id = tilemap.get_cellv(tile_pos)
 	
-	if "Campfire" in inside_area:
-		gui.emit_signal("key_popup", "E", self.position, true)
-	pass
-
+	if has_area2d_object("GroundWall"):
+		var tilemap = get_area2d_object("GroundWall") as TileMap
+		
+		var highway = -1
+		
+		for x in range(-1, 2):
+			for y in range(-1, 2):
+				var tile_pos_wrld = Vector2(position.x + x * 32, position.y + y * 32)
+				
+				var tile_pos = tilemap.world_to_map(tile_pos_wrld)
+				var tile = tilemap.get_cellv(tile_pos)
+				
+				highway = MyTileSet.highway_group.find(tile)
+				if highway != -1:
+					break
+			if highway != -1:
+				break
+		
+		if highway != -1:
+			interact_signal += 1
+			if Input.is_action_just_pressed("ui_interact"):
+				get_parent().emit_signal("room_update", Helper.direction_group[highway])
+				position = tilemap.map_to_world(Helper.direction_spawnpoints[highway]) + Vector2(16, 8)
+	
+	if has_area2d_object("CampfireOthers"):
+		var tilemap = get_area2d_object("CampfireOthers") as TileMap
+		
+		for x in range(-1, 2):
+			for y in range(-1, 2):
+				var tile_pos_wrld = Vector2(position.x + x * 32, position.y + y * 32)
+				
+				var tile_pos = tilemap.world_to_map(tile_pos_wrld)
+				var tile = tilemap.get_cellv(tile_pos)
+				
+				if tile == MyTileSet.campfire_off:
+					interact_signal += 1
+					if Input.is_action_just_pressed("ui_interact"):
+						tilemap.set_cellv(tile_pos, MyTileSet.campfire_lit)
+						get_parent().get_node("Room/Campfire").emit_signal("play_lit_animation", tilemap.map_to_world(tile_pos))
+	
+	gui.emit_signal("key_popup", "E", self.position, interact_signal > 0)
 
 func _on_Player_body_entered(body):
 	emit_signal("collision")
 	if body is TileMap:
 		body.get_cell()
-	pass # Replace with function body.
-
 
 func _on_Area2D_body_entered(body):
-	if !inside_area.has(body):
-		inside_area.append(body.name)
-	pass # Replace with function body.
+	if !inside_area.has(body) and body != self:
+		inside_area.append(body)
 
+func get_area2d_object(name):
+	for obstacle in inside_area:
+		if obstacle.name == name:
+			return obstacle
+	return null
+
+func has_area2d_object(name):
+	for obstacle in inside_area:
+		if obstacle.name == name:
+			return true
+	return false
 
 func _on_Area2D_body_exited(body):
-	inside_area.remove(inside_area.find(body.name))
+	inside_area.remove(inside_area.find(body))
 	
-	if body.name == "Campfire":
-		gui.emit_signal("key_popup", "E", self.position, false)
-	pass # Replace with function body.
+#	if body.name == "Campfire":
+#		gui.emit_signal("key_popup", "E", self.position, false)
+#
+#	if body.name == "GroundWall":
+#		gui.emit_signal("key_popup", "E", self.position, false)

@@ -36,7 +36,7 @@ func getTileFromNoise(point_noise: float) -> int:
 		return TileSetManager.blue_flower
 	elif point_noise > 0.45:
 		var type = randf()
-		if type < 0.75:
+		if type < 0.70:
 			return -1
 		elif type < 0.95:
 			return TileSetManager.berrybush_empty

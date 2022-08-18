@@ -1,59 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/tilesets/env_tileset.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Campfire.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light3.png" type="Texture" id=3]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 160, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 288, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "lit",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ) ],
-"loop": true,
-"name": "unlit",
-"speed": 5.0
-} ]
-
-[sub_resource type="CircleShape2D" id=10]
-radius = 44.7062
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 16.0199, 7.15609 )
 
 [sub_resource type="Animation" id=12]
 resource_name = "LitCampfireAnimation"
@@ -92,20 +40,6 @@ tracks/0/keys = {
 light_mask = 8
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-light_mask = 8
-frames = SubResource( 9 )
-animation = "unlit"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 10 )
-
-[node name="Campfire" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Campfire"]
-position = Vector2( 0, 8.873 )
-shape = SubResource( 11 )
-
 [node name="Light2D" type="Light2D" parent="."]
 scale = Vector2( 1e-05, 1e-05 )
 enabled = false
@@ -123,3 +57,4 @@ anims/LitCampfireAnimation = SubResource( 12 )
 anims/LitIdleCampfireAnimation = SubResource( 13 )
 [connection signal="body_entered" from="." to="." method="_on_Campfire_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Campfire_body_exited"]
+[connection signal="play_lit_animation" from="." to="." method="_on_Campfire_play_lit_animation"]
