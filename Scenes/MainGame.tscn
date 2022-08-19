@@ -12,4 +12,5 @@ script = ExtResource( 4 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 533, 430 )
 speed = 150
+
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]

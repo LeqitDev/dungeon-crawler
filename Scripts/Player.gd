@@ -10,7 +10,6 @@ var BuschGefunden = false
 var inside_area = []
 
 onready var gui = get_parent().get_node("Control/Control")
-onready var tilemap = get_parent().get_node("Room/Enviroment/CampfireOthers")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,11 +34,37 @@ func _process(delta):
 	if Input.is_action_pressed("ui_up"):
 		pos.y -= 1
 	
-	if pos.length() > 0:
-		$AnimatedSprite.animation = "walk"
+	#Player Animation 
+	
+	if pos.x > 0:
+		$AnimatedSprite.animation = "right"
 		pos = pos.normalized() * speed
 		$AnimationPlayer.playback_speed = 2.5
 		$AnimatedSprite.play()
+		
+	elif pos.x < 0:
+		$AnimatedSprite.animation = "left"
+		pos = pos.normalized() * speed
+		$AnimationPlayer.playback_speed = 2.5
+		$AnimatedSprite.play()
+		
+	elif pos.y < 0:
+		$AnimatedSprite.animation = "up"
+		pos = pos.normalized() * speed
+		$AnimationPlayer.playback_speed = 2.5
+		$AnimatedSprite.play()
+		
+	elif pos.y > 0:
+		$AnimatedSprite.animation = "down"
+		pos = pos.normalized() * speed
+		$AnimationPlayer.playback_speed = 2.5
+		$AnimatedSprite.play()
+		
+#	elif pos.length() > 0:
+#		$AnimatedSprite.animation = "walk"
+#		pos = pos.normalized() * speed
+#		$AnimationPlayer.playback_speed = 2.5
+#		$AnimatedSprite.play()
 	else:
 		$AnimationPlayer.playback_speed = 1
 		$AnimatedSprite.stop()
@@ -95,7 +120,7 @@ func _process(delta):
 						tilemap.set_cellv(tile_pos, MyTileSet.campfire_lit)
 						get_parent().get_node("Room/Campfire").emit_signal("play_lit_animation", tilemap.map_to_world(tile_pos))
 				
-				if tile == 35:
+				if tile == MyTileSet.berrybush:
 					interact_signal += 1
 					BuschGefunden = true
 					break

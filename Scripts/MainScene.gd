@@ -2,7 +2,7 @@ extends Node2D
 
 # 37, 19
 
-class_name Room
+class_name MyRoom
 
 var screen_size
 const TileSetManager = preload("res://Scripts/Tiles.gd")

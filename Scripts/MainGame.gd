@@ -24,7 +24,7 @@ class MapRoom:
 	func _init(pos: Vector2):
 		self.pos = pos
 	
-	func finishInit(roomScene: Room):
+	func finishInit(roomScene: MyRoom):
 		roomScene.init(passages)
 		room = roomScene
 

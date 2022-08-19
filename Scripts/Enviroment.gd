@@ -11,7 +11,7 @@ func _ready():
 	
 	randomize()
 	noise.seed = randi()
-	noise.octaves = 10
+	noise.octaves = 9
 	noise.period = 0.1
 	noise.persistence = 0.75
 	for x in range(1, 36):
