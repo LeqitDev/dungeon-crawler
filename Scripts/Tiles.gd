@@ -58,8 +58,21 @@ const white_flower = 44
 
 const highway_group = [left_highway, upper_highway, right_highway, lower_highway]
 
-func getTilesList(tile_map:TileMap) -> Dictionary:
+class Tile:
+	var tilemap: TileMap
+	var tile: int
+	var pos: Vector2
+	
+	func _init(tilemap: TileMap, tile: int, pos: Vector2):
+		self.tilemap = tilemap
+		self.tile = tile
+		self.pos = pos
+
+static func getTilesList(tile_map:TileMap) -> Dictionary:
 	var tiles = {}
 	for i in tile_map.tile_set.get_tiles_ids():
 		tiles[i] = tile_map.tile_set.tile_get_name(i)
 	return tiles
+
+static func setCell(map: TileMap, x: int, y: int, tile: int):
+	map.set_cell(x, y, tile)

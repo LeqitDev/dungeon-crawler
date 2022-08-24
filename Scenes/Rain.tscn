@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+trail_divisor = 9
+emission_shape = 2
+emission_box_extents = Vector3( 680, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( -25, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.109804, 0.337255, 0.768627, 1 )
+hue_variation = -0.03
+hue_variation_random = 0.1
+
+[node name="Node2D" type="Node2D"]
+light_mask = -2147483647
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.156863 )
+light_mask = 2
+position = Vector2( 687.37, -29.2282 )
+amount = 1200
+lifetime = 3.75
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 1 )
