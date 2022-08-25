@@ -1,59 +1,32 @@
-extends Area2D
+extends Node2D
 
 signal play_lit_animation
 
-var inside_area = false
-var is_lit = false
-export var cell_size = 32
-export var x = 0
-export var y = 0
-var collision_box:CollisionShape2D = null
+var init = false;
+onready var noise = OpenSimplexNoise.new()
+var value = 0.0
+const MAX_VALUE = 100000000
 
-var lit_collision = Vector2(16.02, 12.851)
-var lit_transform = Vector2(0, 3.178)
+func _ready():
+	randomize()
+	value = randi() % MAX_VALUE
+	noise.period = 16
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	collision_box = get_child(2).get_child(0) as CollisionShape2D
-#	position = Vector2((x - 0.5) * cell_size, (y - 0.5) * cell_size)
-#	$AnimatedSprite.animation = "unlit"
-#	$AnimatedSprite.play()
-#	pass # Replace with function body.
-#
-#func _process(delta):
-#	if inside_area and !is_lit:
-#		if Input.is_action_pressed("ui_interact"):
-#			$Light2D.enabled = true
-#			$AnimationPlayer.play("LitCampfireAnimation")
-#			var rec_shape = RectangleShape2D.new()
-#			rec_shape.extents = lit_collision
-#			collision_box.shape = rec_shape
-#			collision_box.set_transform(Transform2D(0, lit_transform))
-#			$AnimatedSprite.stop()
-#			$AnimatedSprite.animation = "lit"
-#			$AnimatedSprite.play()
-#			is_lit = true
-#			$AnimationPlayer.queue("LitIdleCampfireAnimation")
-#	pass
-#
-#
-#func _on_Campfire_body_entered(body):
-#	if body is Node2D:
-#		if body.name == "Player":
-#			inside_area = true
-#	pass # Replace with function body.
-#
-#
-#func _on_Campfire_body_exited(body):
-#	if body is Node2D:
-#		if body.name == "Player":
-#			inside_area = false
-#	pass # Replace with function body.
-
+func _physics_process(delta):
+	value += 0.5
+	if value > MAX_VALUE:
+		value = 0.0
+	var alpha = ((noise.get_noise_1d(value) + 1) / 4.0) + 0.5
+	var color = $Light2D.color
+	$Light2D.color = Color(color.r, color.g, color.b, alpha) # change alpha color to random between 0.5 and 1.0 for flicker
 
 func _on_Campfire_play_lit_animation(tile_pos):
-	position = tile_pos + Vector2(16, 16)
+	if !init and tile_pos == Vector2.ZERO:
+		return
+	if !init:
+		position = tile_pos + Vector2(16, 16)
+		init = true
 	$Light2D.enabled = true
 	$AnimationPlayer.play("LitCampfireAnimation")
-	$AnimationPlayer.queue("LitIdleCampfireAnimation")
+#	$AnimationPlayer.queue("LitIdleCampfireAnimation")
 	pass # Replace with function body.
