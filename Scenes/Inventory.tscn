@@ -20,6 +20,9 @@ margin_right = 368.0
 margin_bottom = 249.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="TextureRect"]
 margin_left = 34.5
