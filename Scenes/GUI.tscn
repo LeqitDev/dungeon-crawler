@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
 [ext_resource path="res://Assets/gui/hearts/heart-full.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Health.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/sounds/inventory_open.wav" type="AudioStream" id=6]
 
 [node name="Control" type="CanvasLayer"]
 
@@ -11,13 +13,13 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-margin_left = 16.0
-margin_top = 16.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 188.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_constants/separation = 5
 script = ExtResource( 4 )
 
@@ -58,10 +60,14 @@ anchor_bottom = 0.25
 margin_left = -48.0
 margin_right = -16.0
 texture_normal = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Inventory" parent="Control" instance=ExtResource( 5 )]
+visible = false
+
+[node name="InventoryOpen" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource( 6 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.7, 0.7, 0.7, 1 )
+
 [connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]

@@ -34,8 +34,8 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var size = Vector2((Helper.room_width + 1) * 32, (Helper.room_height + 1) * 32)
-	get_tree().root.set_size(size)
+	#var size = Vector2((Helper.room_width + 1) * 32, (Helper.room_height + 1) * 32)
+	#get_tree().root.set_size(size)
 	$Player.position = Vector2((Helper.room_width / 2.0) * 32, (Helper.room_height - 1) * 32)
 	
 	# initialise room_map with 0

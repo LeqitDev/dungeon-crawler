@@ -21,4 +21,5 @@ speed = 150
 [node name="Rain" parent="." instance=ExtResource( 1 )]
 visible = false
 light_mask = 42
+
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]

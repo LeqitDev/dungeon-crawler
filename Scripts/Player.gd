@@ -45,15 +45,29 @@ func _process(delta):
 	var tiles_inside_area_details = []
 	
 	# movement
+	
+	var sound_has_played = false
 	var pos = Vector2.ZERO
 	if Input.is_action_pressed("ui_left"):
 		pos.x -= 1
+		if !sound_has_played:
+			sound_has_played = true
+			$Footsteps.play()
 	if Input.is_action_pressed("ui_up"):
 		pos.y -= 1
+		if !sound_has_played:
+			sound_has_played = true
+			$Footsteps.play()
 	if Input.is_action_pressed("ui_right"):
 		pos.x += 1
+		if !sound_has_played:
+			sound_has_played = true
+			$Footsteps.play()
 	if Input.is_action_pressed("ui_down"):
 		pos.y += 1
+		if !sound_has_played:
+			sound_has_played = true
+			$Footsteps.play()
 	
 	if pos.length() > 0: # on movement
 		$AnimationPlayer.playback_speed = 1.75 # play walk animations faster
