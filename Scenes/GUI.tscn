@@ -66,6 +66,7 @@ visible = false
 
 [node name="InventoryOpen" type="AudioStreamPlayer" parent="Control"]
 stream = ExtResource( 6 )
+volume_db = -17.029
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.7, 0.7, 0.7, 1 )

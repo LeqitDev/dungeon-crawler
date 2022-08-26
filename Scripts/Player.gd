@@ -46,28 +46,40 @@ func _process(delta):
 	
 	# movement
 	
-	var sound_has_played = false
+	var walking = false
 	var pos = Vector2.ZERO
 	if Input.is_action_pressed("ui_left"):
 		pos.x -= 1
-		if !sound_has_played:
-			sound_has_played = true
-			$Footsteps.play()
 	if Input.is_action_pressed("ui_up"):
 		pos.y -= 1
-		if !sound_has_played:
-			sound_has_played = true
-			$Footsteps.play()
 	if Input.is_action_pressed("ui_right"):
 		pos.x += 1
-		if !sound_has_played:
-			sound_has_played = true
-			$Footsteps.play()
 	if Input.is_action_pressed("ui_down"):
 		pos.y += 1
-		if !sound_has_played:
-			sound_has_played = true
+		
+	if Input.is_action_pressed("ui_down"):
+		walking = true
+			
+	elif Input.is_action_pressed("ui_up"):
+		walking = true
+			
+	elif Input.is_action_pressed("ui_right"):
+		walking = true
+			
+	elif Input.is_action_pressed("ui_left"):
+		walking = true
+		
+	else:
+		walking = false
+		
+	if walking == true:
+		if !$Footsteps.playing:
 			$Footsteps.play()
+	else:
+		if $Footsteps.playing:
+			$Footsteps.stop()
+		
+	
 	
 	if pos.length() > 0: # on movement
 		$AnimationPlayer.playback_speed = 1.75 # play walk animations faster
