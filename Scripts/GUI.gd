@@ -21,7 +21,7 @@ func _ready():
 
 
 func _on_Control_key_popup(key:String, player:Vector2, show:bool):
-	if !$Inventory.visible:
+#	if !$Inventory.visible:
 		if show:
 			_key_popup.visible = true
 			_key_popup.get_child(0).text = key

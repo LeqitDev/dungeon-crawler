@@ -19,6 +19,9 @@ margin_right = 338.0
 margin_bottom = 239.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GridContainer" type="GridContainer" parent="."]
 margin_left = 238.0

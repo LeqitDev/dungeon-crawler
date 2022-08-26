@@ -3,6 +3,10 @@ extends Node2D
 
 var item_name
 var item_quantity
+var textures = {
+	"Sword": preload("res://Assets/gui/item_icons/sword.png"),
+	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,9 +15,8 @@ func _ready():
 		item_name = "Sword"
 	else:
 		item_name = "Arrow"
-		
 	
-	$TextureRect.texture = load("res://Assets/gui/item_icons/" + item_name + ".png")
+	$TextureRect.texture = textures[item_name]
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	item_quantity = randi() % stack_size + 1
 	
