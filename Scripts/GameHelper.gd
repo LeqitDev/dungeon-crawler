@@ -8,6 +8,7 @@ const room_height = 14 # 14 (0..14)
 const direction_group = [Vector2.LEFT, Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.DOWN + Vector2.LEFT, Vector2.UP + Vector2.LEFT, Vector2.DOWN + Vector2.RIGHT, Vector2.UP + Vector2.RIGHT]
 const direction_spawnpoints = [Vector2(room_width - 1, room_height / 2), Vector2(room_width / 2, room_height - 1), Vector2(1, room_height / 2), Vector2(room_width / 2, 1)]
 const direction_player_animation = ["PlayerWalkLeft", "PlayerWalkUp", "PlayerWalkRight", "PlayerWalkDown", "PlayerWalkLeft", "PlayerWalkLeft", "PlayerWalkRight", "PlayerWalkRight"]
+const direction_player_weapon_animation = ["WalkLeft", "WalkUp", "WalkRight", "WalkDown", "WalkLeft", "WalkLeft", "WalkRight", "WalkRight"]
 
 static func getTileRatio(aspect_ratio):
 	if aspect_ratio == -1:

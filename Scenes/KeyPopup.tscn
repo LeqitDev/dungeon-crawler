@@ -1,19 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/fonts/Silkscreen.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/gui/key_popup_background1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/gui/key_popup_background2.svg" type="Texture" id=2]
 
-[node name="TextureRect" type="TextureRect"]
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 1 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 32.0
 margin_bottom = 32.0
-rect_scale = Vector2( 0.75, 0.75 )
+rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="TextureRect"]
 margin_top = -4.0
 margin_right = 32.0
 margin_bottom = 28.0
@@ -21,3 +39,9 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 1 )

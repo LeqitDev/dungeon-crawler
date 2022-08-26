@@ -71,7 +71,6 @@ func init(passages):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().root.get_child(0).connect("room_update_done", self, "updateRoomFinished")
-	Helper.randomExec(0.51, funcref(self, "hello"), ["deine"])
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

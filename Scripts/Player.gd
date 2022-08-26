@@ -18,7 +18,6 @@ var interactable_tiles = [MyTileSet.berrybush, MyTileSet.berrybush_empty, MyTile
 
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
-onready var tween = get_node("Tween")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,9 +35,10 @@ func _process(delta):
 	
 	# int for interact signal "E"-Button
 	var interact_signal = 0
+	var interact_signal_objects = []
 	
-	# postion offset for ux
-	var fixed_pos = Vector2(position.x, position.y+32)
+	# postion offset for ux needs to be updated every frame
+	var fixed_pos = Vector2(position.x, position.y)
 	
 	# needs to be empty every new frame
 	var tiles_inside_area = []
@@ -57,17 +57,23 @@ func _process(delta):
 	
 	if pos.length() > 0: # on movement
 		$AnimationPlayer.playback_speed = 1.75 # play walk animations faster
+		$AnimationPlayerWeapon.playback_speed = 1.75
 		var direction = Helper.direction_group.find(pos)
 		$AnimationPlayer.play(Helper.direction_player_animation[direction]) # play the walk animation for the direction
+		$AnimationPlayerWeapon.play(Helper.direction_player_weapon_animation[direction])
 		pos = pos.normalized() * speed # calculate position with speed
 		$AnimationPlayerLight.playback_speed = 2.5 # animation speed for light so it flickers more
 	else: # no movement
 		# normal player and light animationspeed
 		$AnimationPlayer.playback_speed = 1
+		$AnimationPlayerWeapon.playback_speed = 1
 		$AnimationPlayerLight.playback_speed = 1
 		$AnimationPlayer.play("PlayerIdle") # idle player animation
+		$AnimationPlayerWeapon.play("Idle")
 	
 	pos = move_and_slide(pos) # move player (get new position)
+	
+	$CombatArea/CollisionPolygon2D.look_at(get_global_mouse_position())
 	
 	# get collided tile (CollisionShape2D)
 	for i in get_slide_count():
@@ -95,13 +101,16 @@ func _process(delta):
 	
 	if MyTileSet.campfire_off in tiles_inside_area: # check for campfire (off)
 		interact_signal += 1 # show "E" interact key 
+		var tile_obj = tiles_inside_area_details[tiles_inside_area.find(MyTileSet.campfire_off)] # get more details about the tile (tilemap, position)
+		interact_signal_objects.append(tile_obj.tilemap.map_to_world(tile_obj.pos))
 		if Input.is_action_just_pressed("ui_interact"): # has campfire and "E" pressed
-			var tile_obj = tiles_inside_area_details[tiles_inside_area.find(MyTileSet.campfire_off)] # get more details about the tile (tilemap, position)
 			tile_obj.tilemap.set_cellv(tile_obj.pos, MyTileSet.campfire_lit) # set campfire to lit campfire
 			get_parent().get_node("Room/Campfire").emit_signal("play_lit_animation", tile_obj.pos * 32) # set position of campfire light
 	
 	if MyTileSet.berrybush in tiles_inside_area: # check for berrybushes
 		interact_signal += 1 # show "E" interact key
+		var tile_obj = tiles_inside_area_details[tiles_inside_area.find(MyTileSet.berrybush)]
+		interact_signal_objects.append(tile_obj.tilemap.map_to_world(tile_obj.pos))
 		BuschGefunden = true
 	
 	if BuschGefunden == true:
@@ -109,13 +118,18 @@ func _process(delta):
 	
 	for highway in MyTileSet.highway_group: # check for highways
 		if highway in tiles_inside_area:
-			interact_signal += 1 # show "E" interact key 
+			interact_signal += 1 # show "E" interact key
+			var tile_obj = tiles_inside_area_details[tiles_inside_area.find(highway)]
+			interact_signal_objects.append(tile_obj.tilemap.map_to_world(tile_obj.pos))
 			if Input.is_action_just_pressed("ui_interact"): # has highways and "E" pressed
 				var highway_i = MyTileSet.highway_group.find(highway) # get which highway it was left, top, etc
 				get_parent().emit_signal("room_update", Helper.direction_group[highway_i]) # update the room to the new one
 				position = Helper.direction_spawnpoints[highway_i] * 32 + Vector2(16, 8) # set new Player position
 	
-	gui.emit_signal("key_popup", "E", self.position, interact_signal > 0) # "E" key popup
+	if interact_signal > 0:
+		gui.emit_signal("key_popup", "E", interact_signal_objects[0], true) # "E" key popup
+	else:
+		gui.emit_signal("key_popup", "E", Vector2.ZERO, false)
 
 func _on_Area2D_body_entered(body):
 	if !inside_area.has(body) and body != self:

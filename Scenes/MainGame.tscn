@@ -7,6 +7,7 @@
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 4 )
+layer = 1
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 736, 480 )
@@ -16,7 +17,7 @@ follow_viewport_enable = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 399.215, 270.535 )
-speed = 150
+speed = 100
 
 [node name="Rain" parent="." instance=ExtResource( 1 )]
 visible = false

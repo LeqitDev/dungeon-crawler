@@ -1,19 +1,26 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/player/player_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/sword.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.3484
 height = 22.8778
 
-[sub_resource type="Animation" id=2]
-resource_name = "PlayerIdle"
+[sub_resource type="OccluderPolygon2D" id=2]
+cull_mode = 1
+polygon = PoolVector2Array( 0.894894, 15.9588, 2.00854, 15.0046, 6.03022, 8.97213, 6.0302, -0.043474, 8.99121, -3.00449, 9, -4.9375, 8.00145, -12.0325, 4.90064, -15.0282, -5.03244, -14.9757, -8.02814, -11.9274, -8.08069, -1.99435, -6.13612, -0.0497742, -6.08352, 8.9373, -2.03671, 14.9287, -0.933029, 16.0324 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 29.2667
+
+[sub_resource type="Animation" id=4]
 length = 1.25
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprites/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,12 +32,11 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "PlayerWalkDown"
+[sub_resource type="Animation" id=5]
 length = 1.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprites/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -42,12 +48,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "PlayerWalkLeft"
+[sub_resource type="Animation" id=6]
 length = 1.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprites/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -59,12 +64,11 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "PlayerWalkRight"
+[sub_resource type="Animation" id=7]
 length = 1.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprites/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -76,12 +80,11 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "PlayerWalkUp"
+[sub_resource type="Animation" id=8]
 length = 1.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprites/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -92,12 +95,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4, 5, 6, 7 ]
 }
-
-[sub_resource type="OccluderPolygon2D" id=7]
-polygon = PoolVector2Array( 0.894894, 15.9588, 2.00854, 15.0046, 6.03022, 8.97213, 6.0302, -0.043474, 8.99121, -3.00449, 9, -4.9375, 8.00145, -12.0325, 4.90064, -15.0282, -5.03244, -14.9757, -8.02814, -11.9274, -8.08069, -1.99435, -6.13612, -0.0497742, -6.08352, 8.9373, -2.03671, 14.9287, -0.933029, 16.0324 )
-
-[sub_resource type="CircleShape2D" id=8]
-radius = 29.2667
 
 [sub_resource type="Animation" id=9]
 length = 0.5
@@ -111,7 +108,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( -2, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.4, 0.4 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0.35, 0.35 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -130,11 +127,246 @@ tracks/0/keys = {
 "values": [ 1.0, 0.85, 1.1 ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "Idle"
+length = 1.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -7, 0 ), Vector2( -7, -1 ), Vector2( -7, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/WeaponSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/WeaponSprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "WalkDown"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -7, 3 ), Vector2( -3, 2 ), Vector2( -7, 3 ), Vector2( -5, 13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/WeaponSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, 15.0, 0.0, -180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/WeaponSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.55, 0.55 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/WeaponSprite:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 1.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6, 9 ), Vector2( -2, 12 ), Vector2( -6, 9 ), Vector2( -8, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/WeaponSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ -89.9999, -120.0, -90.0, -44.9999 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/WeaponSprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/WeaponSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 1.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 6, 9 ), Vector2( 8, 2 ), Vector2( 6, 9 ), Vector2( 2, 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/WeaponSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 90.0, 45.0, 90.0, 120.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/WeaponSprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/WeaponSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "WalkUp"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, 3 ), Vector2( 5, 13 ), Vector2( 7, 3 ), Vector2( 3, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/WeaponSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, -180.0, 0.0, -15.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/WeaponSprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 10.319 )
+position = Vector2( 0, 7.33 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.35 )
 shape = SubResource( 1 )
@@ -151,35 +383,57 @@ shadow_filter = 5
 shadow_filter_smooth = 64.0
 shadow_item_cull_mask = -2147483628
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/PlayerIdle = SubResource( 2 )
-anims/PlayerWalkDown = SubResource( 3 )
-anims/PlayerWalkLeft = SubResource( 4 )
-anims/PlayerWalkRight = SubResource( 5 )
-anims/PlayerWalkUp = SubResource( 6 )
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 light_mask = -2147483584
-occluder = SubResource( 7 )
+position = Vector2( 0, -2.883 )
+occluder = SubResource( 2 )
 light_mask = -2147483584
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="PlayerSprite" type="Sprite" parent="Sprites"]
 light_mask = 32
+position = Vector2( 0, -3 )
+z_index = 1
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 4
-frame = 8
+frame = 16
+
+[node name="WeaponSprite" type="Sprite" parent="Sprites"]
+light_mask = 32
+position = Vector2( -7, 0 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/PlayerIdle = SubResource( 4 )
+anims/PlayerWalkDown = SubResource( 5 )
+anims/PlayerWalkLeft = SubResource( 6 )
+anims/PlayerWalkRight = SubResource( 7 )
+anims/PlayerWalkUp = SubResource( 8 )
 
 [node name="AnimationPlayerLight" type="AnimationPlayer" parent="."]
 anims/LitTorchAnimation = SubResource( 9 )
 anims/TorchLightAnimations = SubResource( 10 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="AnimationPlayerWeapon" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 11 )
+anims/WalkDown = SubResource( 12 )
+anims/WalkLeft = SubResource( 13 )
+anims/WalkRight = SubResource( 14 )
+anims/WalkUp = SubResource( 15 )
+
+[node name="CombatArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CombatArea"]
+polygon = PoolVector2Array( 29, 0, 28, 8, 25, 15, 21, 20, 0, 0, 22, -19, 25, -15, 28, -8 )
 [connection signal="lit_torch" from="." to="." method="_on_Player_lit_torch"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
