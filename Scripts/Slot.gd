@@ -9,6 +9,7 @@ var empty_style: StyleBoxTexture = null
 
 var ItemClass = preload("res://Scenes/Item.tscn")
 var item = null
+var slot_index
 
 func _ready():
 	default_style = StyleBoxTexture.new()
@@ -19,9 +20,9 @@ func _ready():
 	
 	
 	
-	if randi() % 2 == 0:
-		item = ItemClass.instance()
-		add_child(item)
+#	if randi() % 2 == 0:
+#		item = ItemClass.instance()
+#		add_child(item)
 	refresh_style()
 
 func refresh_style():
@@ -46,4 +47,11 @@ func putIntoSlot(new_item):
 	refresh_style()
 
 
-
+func initialize_item(item_name, item_quantity):
+	if item == null:
+		item = ItemClass.instance()
+		add_child(item)
+		item.set_item(item_name, item_quantity)
+	else:
+		item.set_item(item_name, item_quantity)
+	refresh_style()

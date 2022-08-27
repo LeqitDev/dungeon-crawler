@@ -11,5 +11,11 @@
     "ItemDamage": 1,
     "StackSize": 20,
     "Description": "Most simple Arrow there is to be found."
+  },
+  "Redberry": {
+    "ItemCategory": "Consumable",
+    "ItemDamage": 0,
+    "StackSize": 20,
+    "Description": "Berry. Or is it?"
   }
 }

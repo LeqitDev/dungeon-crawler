@@ -35,6 +35,7 @@ func _on_Control_key_popup(key:String, player:Vector2, show:bool):
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		$Inventory.visible = !$Inventory.visible
+		$Inventory.initialize_inventory()
 		$InventoryOpen.play()
 		
 		if _key_popup.visible == true:

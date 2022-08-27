@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword.png-fd1785f32bb7472a8f5ed75c5264386d.stex"
+path="res://.import/redberry.png-4c89ebf1d3880243fcb35e41d7f1869e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gui/item_icons/sword.png"
-dest_files=[ "res://.import/sword.png-fd1785f32bb7472a8f5ed75c5264386d.stex" ]
+source_file="res://Assets/gui/item_icons/redberry.png"
+dest_files=[ "res://.import/redberry.png-4c89ebf1d3880243fcb35e41d7f1869e.stex" ]
 
 [params]
 

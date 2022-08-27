@@ -6,24 +6,19 @@ var item_quantity
 var textures = {
 	"Sword": preload("res://Assets/gui/item_icons/sword.png"),
 	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
+	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
 }
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var rand_val = randi() % 2
-	if rand_val == 0:
-		item_name = "Sword"
-	else:
-		item_name = "Arrow"
-	
+func set_item(nm, qt):
+	item_name = nm
+	item_quantity = qt
 	$TextureRect.texture = textures[item_name]
+	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-	item_quantity = randi() % stack_size + 1
-	
-	
 	if stack_size == 1:
 		$Label.visible = false
 	else:
+		$Label.visible = true
 		$Label.text = String(item_quantity)
 
 func add_item_quantity(amount_to_add):
