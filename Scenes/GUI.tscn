@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scripts/Health.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/sounds/inventory_open.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/gui/hotbar/playerhud_normal.png" type="Texture" id=8]
 
 [node name="Control" type="CanvasLayer"]
 
@@ -13,9 +15,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Inventory" parent="Control" instance=ExtResource( 5 )]
 visible = false
@@ -72,7 +71,17 @@ texture_normal = ExtResource( 2 )
 stream = ExtResource( 6 )
 volume_db = -17.029
 
+[node name="Hotbar" parent="Control" instance=ExtResource( 7 )]
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_left = 16.0
+margin_top = 400.0
+margin_right = 80.0
+margin_bottom = 464.0
+texture = ExtResource( 8 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.7, 0.7, 0.7, 1 )
 
+[connection signal="inv_closed" from="Control" to="Control/Inventory" method="_on_Control_inv_closed"]
 [connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]

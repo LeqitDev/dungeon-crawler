@@ -3,11 +3,10 @@ extends Control
 class_name GUI
 
 signal key_popup(key, player, show)
+signal inv_closed
 
 var KeyPopup = preload("res://Scenes/KeyPopup.tscn")
 var _key_popup:TextureRect = null
-
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -34,9 +33,11 @@ func _on_Control_key_popup(key:String, player:Vector2, show:bool):
 
 func _input(event):
 	if event.is_action_pressed("inventory"):
+		
 		$Inventory.visible = !$Inventory.visible
 		$Inventory.initialize_inventory()
 		$InventoryOpen.play()
-		
+		if $Inventory.visible == false:
+			emit_signal("inv_closed")
 		if _key_popup.visible == true:
 			_key_popup.visible = false

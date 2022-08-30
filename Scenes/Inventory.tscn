@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/gui/inventory/default_inventory_background.png" type="Texture" id=1]
 [ext_resource path="res://Assets/gui/inventory/item_slot_default_background.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Slot.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=4]
 [ext_resource path="res://Assets/fonts/Silkscreen.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/sounds/pick_up_item.wav" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -141,3 +142,6 @@ margin_bottom = 128.0
 rect_min_size = Vector2( 32, 32 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )

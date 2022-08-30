@@ -3,6 +3,8 @@ extends Control
 const SlotClass = preload("res://Scripts/Slot.gd")
 onready var inventory_slots = $GridContainer
 var holding_item = null
+var inv_open = false
+var slot_wo_mans_her_hat = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,13 +32,16 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_different_item(event, slot)
 					else: # selbes Item also zusammenführen
 						left_click_same_item(slot)	
-			elif slot.item:
+			elif slot.item:	
 				left_click_not_holding(slot)
-
-
+				slot_wo_mans_her_hat = slot
+				
+	
 func _input(event):
 	if holding_item:
 		holding_item.global_position = Vector2(get_global_mouse_position().x -16, get_global_mouse_position().y -16)
+		if event.is_action_pressed("inventory"):
+			close_inventory_holding_item(slot_wo_mans_her_hat)
 
 func left_click_empty_slot(slot: SlotClass):
 	PlayerInventory.add_item_to_empty_slot(holding_item, slot)
@@ -61,7 +66,6 @@ func left_click_same_item(slot: SlotClass):
 		holding_item.queue_free()
 		holding_item = null
 	else:
-		PlayerInventory.add_item_qantity(slot, able_to_add)
 		slot.item.add_item_quantity(able_to_add)
 		holding_item.decrease_item_quantity(able_to_add)
 		
@@ -70,3 +74,9 @@ func left_click_not_holding(slot: SlotClass):
 	holding_item = slot.item
 	slot.pickFromSolt()
 	holding_item.global_position = get_global_mouse_position()
+	
+func close_inventory_holding_item(slot: SlotClass):
+	if holding_item != null:
+		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+		slot.putIntoSlot(holding_item)
+		holding_item = null
