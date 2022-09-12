@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Game
+
 signal room_update(direction)
 signal room_update_done
 
@@ -15,7 +17,13 @@ var offspring_possibility = 0.95 # 1-this = possibility that new room is not a r
 
 var room_pos = Vector2.ZERO
 
+var config
+
 var RoomScene = preload("res://Scenes/DungeonRoom.tscn")
+
+var cursor_image = preload("res://Assets/cursor2.png")
+
+onready var player = $Player
 
 class MapRoom:
 	var pos: Vector2
@@ -31,12 +39,20 @@ class MapRoom:
 
 func _init():
 #	OS.window_maximized = false
+	config = Config.new()
 	VisualServer.texture_set_shrink_all_x2_on_set_data(true)
+
+func _input(event):
+	if event.is_action_pressed("ui_debug"):
+		config.setProp("debug", !config.getProp("debug"))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	var size = Vector2((Helper.room_width + 1) * 32, (Helper.room_height + 1) * 32)
 #	get_tree().root.set_size(size) # if used cropped textures fuck it
+	Input.set_custom_mouse_cursor(cursor_image,
+			Input.CURSOR_ARROW,
+			Vector2(64, 64))
 	$Player.position = Vector2((Helper.room_width / 2.0) * 32, (Helper.room_height - 1) * 32)
 	
 	# initialise room_map with 0
@@ -70,7 +86,6 @@ func _ready():
 	# add the first room scene to the main game scene
 	add_child(room_map[room_pos.y][room_pos.x].room)
 	move_child(get_child(get_child_count()-1), 0)
-	
 #	print_room_map()
 
 func select_next_room():
@@ -190,6 +205,9 @@ func get_map_row(row, char_width_x) -> String:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func get_config():
+	return config
 
 func _on_MainGame_room_update(direction):
 	room_pos += direction

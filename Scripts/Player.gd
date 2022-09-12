@@ -16,6 +16,8 @@ var BuschGefunden = false
 var inside_area = []
 var interactable_tiles = [MyTileSet.berrybush, MyTileSet.berrybush_empty, MyTileSet.campfire_off] + MyTileSet.highway_group
 
+var inside_combat_area = []
+
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
 
@@ -28,6 +30,11 @@ func _ready():
 	randomize()
 	value = randi() % MAX_VALUE
 	noise.period = 16
+
+func _input(event):
+	if event.is_action_pressed("ui_mouse_left"):
+		for obj in inside_combat_area:
+			obj.emit_signal("combat", position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -167,3 +174,12 @@ func _on_Player_lit_torch():
 
 func updateRoomFinished():
 	emit_signal("lit_torch")
+
+
+func _on_CombatArea_body_entered(body):
+	if !inside_combat_area.has(body) and body != self:
+		inside_combat_area.append(body)
+
+
+func _on_CombatArea_body_exited(body):
+	inside_combat_area.remove(inside_combat_area.find(body))

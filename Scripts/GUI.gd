@@ -23,8 +23,8 @@ func _ready():
 func _on_Control_key_popup(key:String, player:Vector2, show:bool):
 	if show:
 		_key_popup.visible = true
-		_key_popup.get_child(0).get_child(0).text = key
-		_key_popup.set_position(Vector2(player.x + 8, player.y - 8))
+		_key_popup.get_child(0).text = key
+		_key_popup.set_position(Vector2(player.x + 8, player.y + 8))
 	else:
 		_key_popup.visible = false
 	pass # Replace with function body.

@@ -43,9 +43,10 @@ func init(passages):
 			$Enviroment/Layer1.set_cellv(root_pos, root_edges[i])
 			i += 1
 	
+	#generating grass
 	for x in range(1, Helper.room_width):
 		for y in range(1, Helper.room_height):
-			$Enviroment/Layer0.set_cell(x, y, MyTileSet.grass)
+			$Enviroment/Layer0.set_cell(x, y, MyTileSet.grass, Helper.randomBool(0.1), Helper.randomBool(0.1))
 	
 	# Placing the campfire in the middle
 	$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0), MyTileSet.campfire_off)

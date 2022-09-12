@@ -1,4 +1,3 @@
-
 class_name Helper
 
 const _aspect_ratio = 22 / 14.0
@@ -30,3 +29,7 @@ static func randomBool(possibility) -> bool:
 		return true
 	else:
 		return false
+
+static func getConfig(obj):
+	return obj.get_tree().root.get_child(0).get_config()
+

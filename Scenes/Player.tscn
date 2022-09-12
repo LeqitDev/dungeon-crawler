@@ -14,7 +14,7 @@ cull_mode = 1
 polygon = PoolVector2Array( 0.894894, 15.9588, 2.00854, 15.0046, 6.03022, 8.97213, 6.0302, -0.043474, 8.99121, -3.00449, 9, -4.9375, 8.00145, -12.0325, 4.90064, -15.0282, -5.03244, -14.9757, -8.02814, -11.9274, -8.08069, -1.99435, -6.13612, -0.0497742, -6.08352, 8.9373, -2.03671, 14.9287, -0.933029, 16.0324 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 29.2667
+radius = 30.0
 
 [sub_resource type="Animation" id=4]
 length = 1.25
@@ -433,7 +433,9 @@ anims/WalkUp = SubResource( 15 )
 [node name="CombatArea" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CombatArea"]
-polygon = PoolVector2Array( 29, 0, 28, 8, 25, 15, 21, 20, 0, 0, 22, -19, 25, -15, 28, -8 )
+polygon = PoolVector2Array( 30, 0, 29, 8, 26, 15, 22, 20, 0, 0, 22, -20, 26, -15, 29, -8 )
 [connection signal="lit_torch" from="." to="." method="_on_Player_lit_torch"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="CombatArea" to="." method="_on_CombatArea_body_entered"]
+[connection signal="body_exited" from="CombatArea" to="." method="_on_CombatArea_body_exited"]
