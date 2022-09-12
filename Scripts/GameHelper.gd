@@ -31,5 +31,5 @@ static func randomBool(possibility) -> bool:
 		return false
 
 static func getConfig(obj):
-	return obj.get_tree().root.get_child(0).get_config()
+	return obj.get_tree().root.get_node("MainGame").get_config()
 
