@@ -48,8 +48,6 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	var size = Vector2((Helper.room_width + 1) * 32, (Helper.room_height + 1) * 32)
-#	get_tree().root.set_size(size) # if used cropped textures fuck it
 	Input.set_custom_mouse_cursor(cursor_image,
 			Input.CURSOR_ARROW,
 			Vector2(64, 64))

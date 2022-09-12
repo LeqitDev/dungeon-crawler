@@ -1,0 +1,15 @@
+{
+  "Sword": {
+    "ItemCategory": "Sword",
+    "ItemAttack": 3,
+    "ItemSpeed": 1,
+    "StackSize": 1,
+    "Description": "Rusty old sword."
+  },
+  "Arrow": {
+    "ItemCategory": "Projectile",
+    "ItemDamage": 1,
+    "StackSize": 20,
+    "Description": "Most simple Arrow there is to be found."
+  }
+}
