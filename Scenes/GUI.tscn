@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Health.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/sounds/inventory_open.wav" type="AudioStream" id=6]
-[ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Hotbar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/gui/hotbar/playerhud_normal.png" type="Texture" id=8]
 
 [node name="Control" type="CanvasLayer"]
@@ -15,9 +15,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Inventory" parent="Control" instance=ExtResource( 5 )]
 visible = false

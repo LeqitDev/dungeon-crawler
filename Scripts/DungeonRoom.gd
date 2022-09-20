@@ -3,9 +3,12 @@ extends Node2D
 # 37, 19
 
 class_name DungeonRoom
+signal drop_item
 
 var screen_size
 const TileSetManager = preload("res://Scripts/Tiles.gd")
+var ItemDrop = preload("res://Scripts/ItemDrop.gd")
+
 
 func init(passages):
 	# generating top and bottom border
@@ -72,6 +75,7 @@ func init(passages):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().root.get_child(0).connect("room_update_done", self, "updateRoomFinished")
+	self.connect("drop_item", self, "on_item_drop_signal")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,3 +84,32 @@ func _process(delta):
 
 func updateRoomFinished():
 	get_node("Campfire").emit_signal("play_lit_animation", Vector2.ZERO)
+
+func on_item_drop_signal(itemname, amount, pos):
+	
+	if itemname != "chest":
+		if amount == 1:
+			var instance = load("res://Scenes/ItemDrop.tscn").instance()
+			self.add_child(instance)
+			instance.emit_signal("initItem", itemname)
+			instance.position = pos
+	else:
+		var item1 = "Sword"
+		var item2 = "Arrow"
+		var item3 = "Redberry"
+		
+		
+		for n in 3:
+			var instance = load("res://Scenes/ItemDrop.tscn").instance()
+			self.add_child(instance)
+			if n == 0:
+				instance.emit_signal("initItem", item1)
+				var fixedpos = Vector2(pos.x -30,pos.y)
+				instance.position = fixedpos
+			if n == 1:
+				instance.emit_signal("initItem", item2)
+				instance.position = pos
+			if n == 2:
+				instance.emit_signal("initItem", item3)
+				var fixedpos = Vector2(pos.x +30,pos.y)
+				instance.position = fixedpos

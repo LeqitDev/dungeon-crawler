@@ -12,6 +12,8 @@ var value = 0.0
 const MAX_VALUE = 100000000
 
 var BuschGefunden = false
+var BuschTilePos = null
+var BuschObj = null
 
 var inside_area = []
 var interactable_tiles = [MyTileSet.berrybush, MyTileSet.berrybush_empty, MyTileSet.campfire_off] + MyTileSet.highway_group
@@ -19,6 +21,17 @@ var inside_combat_area = []
 
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
+
+var textures = {
+	"Sword": preload("res://Assets/gui/item_icons/sword/sword.png"),
+	"SwordII": preload("res://Assets/gui/item_icons/sword/swordII.png"),
+	"SwordIII": preload("res://Assets/gui/item_icons/sword/swordIII.png"),
+	"SwordIV": preload("res://Assets/gui/item_icons/sword/swordIV.png"),
+	"SwordV": preload("res://Assets/gui/item_icons/sword/swordV.png"),
+	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
+	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
+	"AxeII": preload("res://Assets/gui/item_icons/axeii.png"),
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,12 +42,14 @@ func _ready():
 	randomize()
 	value = randi() % MAX_VALUE
 	noise.period = 16
+	
 
 func _input(event):
 	# attack
 	if event.is_action_pressed("ui_mouse_left"):
 		for obj in inside_combat_area:
 			obj.emit_signal("combat", position)
+			$Attack.play()
 	
 	# pick up items
 	if event.is_action_pressed("pickup"):
@@ -42,8 +57,15 @@ func _input(event):
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
 			$PickupZone.items_in_range.erase(pickup_item)
-
-
+		
+	if event.is_action_pressed("ui_interact"):
+		if BuschGefunden == true:
+			BuschObj.tilemap.set_cell(BuschTilePos.x, BuschTilePos.y, MyTileSet.berrybush_empty)
+			get_parent().get_node("Room").emit_signal("drop_item", "Redberry", 1, Vector2(position.x , position.y - 30))
+	
+	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
+		if PlayerInventory.get_active_item() != null:
+			$Sprites/WeaponSprite.texture = textures[PlayerInventory.get_active_item()]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -140,8 +162,9 @@ func _process(delta):
 		var tile_obj = tiles_inside_area_details[tiles_inside_area.find(MyTileSet.berrybush)]
 		interact_signal_objects.append(tile_obj.tilemap.map_to_world(tile_obj.pos))
 		BuschGefunden = true
-	
-	if BuschGefunden == true:
+		BuschTilePos = tile_obj.pos
+		BuschObj = tile_obj
+	else:
 		BuschGefunden = false
 	
 	for highway in MyTileSet.highway_group: # check for highways
@@ -204,3 +227,5 @@ func _on_CombatArea_body_entered(body):
 
 func _on_CombatArea_body_exited(body):
 	inside_combat_area.remove(inside_combat_area.find(body))
+	
+

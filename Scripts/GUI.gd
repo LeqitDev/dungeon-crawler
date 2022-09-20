@@ -7,6 +7,8 @@ signal inv_closed
 
 var KeyPopup = preload("res://Scenes/KeyPopup.tscn")
 var _key_popup = null
+var holding_item = null
+var initial_slot = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,3 +43,12 @@ func _input(event):
 			emit_signal("inv_closed")
 		if _key_popup.visible == true:
 			_key_popup.visible = false
+
+
+	if event.is_action_pressed("scroll_up"):
+		PlayerInventory.active_item_scroll_up()
+		
+		
+	
+	elif event.is_action_pressed("scroll_down"):
+		PlayerInventory.active_item_scroll_down()

@@ -1,16 +1,51 @@
 {
   "Sword": {
-    "ItemCategory": "Sword",
-    "ItemAttack": 3,
+    "ItemCategory": "Weapon",
+    "ItemDamage": 1,
     "ItemSpeed": 1,
     "StackSize": 1,
-    "Description": "Rusty old sword."
+    "Description": "Common sword."
+  },
+  "SwordII": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 2,
+    "ItemSpeed": 1,
+    "StackSize": 1,
+    "Description": "Uncommon sword."
+  },
+  "SwordIII": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 3,
+    "ItemSpeed": 1,
+    "StackSize": 1,
+    "Description": "Rare sword."
+  },
+  "SwordIV": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 4,
+    "ItemSpeed": 1,
+    "StackSize": 1,
+    "Description": "Mythic sword."
+  },
+  "SwordV": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 5,
+    "ItemSpeed": 1,
+    "StackSize": 1,
+    "Description": "Legendary sword."
+  },
+  "AxeII": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 5,
+    "ItemSpeed": 0.5,
+    "StackSize": 1,
+    "Description": "Pretty impressive Axe."
   },
   "Arrow": {
     "ItemCategory": "Projectile",
     "ItemDamage": 1,
     "StackSize": 20,
-    "Description": "Most simple Arrow there is to be found."
+    "Description": "An Arrow!"
   },
   "Redberry": {
     "ItemCategory": "Consumable",

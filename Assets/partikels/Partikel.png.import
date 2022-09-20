@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/key_popup_background2.png-0ad65fcd7e0f3105f97c67afcbbcb469.stex"
+path="res://.import/Partikel.png-8df658fc1f86e6315f6212bfe74d60f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gui/key_popup_background2.png"
-dest_files=[ "res://.import/key_popup_background2.png-0ad65fcd7e0f3105f97c67afcbbcb469.stex" ]
+source_file="res://Assets/partikels/Partikel.png"
+dest_files=[ "res://.import/Partikel.png-8df658fc1f86e6315f6212bfe74d60f8.stex" ]
 
 [params]
 
