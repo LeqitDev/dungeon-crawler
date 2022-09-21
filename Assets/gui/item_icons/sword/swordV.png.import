@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/key_popup_background2.png-0ad65fcd7e0f3105f97c67afcbbcb469.stex"
+path="res://.import/swordV.png-07f4805e7c98c487eca24f7449dfc01c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gui/key_popup_background2.png"
-dest_files=[ "res://.import/key_popup_background2.png-0ad65fcd7e0f3105f97c67afcbbcb469.stex" ]
+source_file="res://Assets/gui/item_icons/sword/swordV.png"
+dest_files=[ "res://.import/swordV.png-07f4805e7c98c487eca24f7449dfc01c.stex" ]
 
 [params]
 

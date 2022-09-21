@@ -3,16 +3,24 @@ extends Node
 const SlotClass = preload("res://Scripts/Slot.gd")
 const ItemClass = preload("res://Scripts/Item.gd")
 const NUM_INVENTORY_SLOTS = 11
+const NUM_HOTBAR_SLOTS = 2
 
 var inventory = {
-	0: ["Arrow", 1], #--> slot_index: [item_name. item_quantity]
-	1: ["Redberry", 5]
+	0: ["Arrow", 1], #--> slot_index: [item_name, item_quantity]
+	1: ["Redberry", 5],
+	2: ["Sword", 1],
+	3: ["SwordII", 1],
+	4: ["SwordIII", 1],
+	5: ["SwordIV", 1],
+	6: ["SwordV", 1]
 }
 
 var hotbar = {
-	1: ["Sword", 1]
+	0: ["Sword", 1],
+	1: ["Arrow", 1]
 }
 
+var active_item_slot = 0
 
 func add_item(item_name, item_quantity):
 	for item in inventory:
@@ -40,11 +48,32 @@ func update_slot_visual(slot_index, item_name, new_quantity):
 	else:
 		slot.initialize_item(item_name, new_quantity)
 		
-func add_item_to_empty_slot(item: ItemClass, slot: SlotClass):
-	inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, is_hotbar: bool = false):
+	if is_hotbar:
+		hotbar[slot.slot_index] = [item.item_name, item.item_quantity]
+	else:
+		inventory[slot.slot_index] = [item.item_name, item.item_quantity]
 
-func remove_item(slot: SlotClass):
-	inventory.erase(slot.slot_index)
+func remove_item(slot: SlotClass, is_hotbar: bool = false):
+	if is_hotbar:
+		hotbar.erase(slot.slot_index)
+	else:
+		inventory.erase(slot.slot_index)
 	
-func add_item_quantity(slot: SlotClass, quantity_to_add: int):
-	inventory[slot.slot_index][1] += quantity_to_add
+func add_item_quantity(slot: SlotClass, quantity_to_add: int, is_hotbar: bool = false):
+	if is_hotbar:
+		hotbar[slot.slot_index][1] += quantity_to_add
+	else:
+		inventory[slot.slot_index][1] += quantity_to_add
+
+func active_item_scroll_up():
+	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
+	
+func active_item_scroll_down():
+	if active_item_slot == 0:
+		active_item_slot = NUM_HOTBAR_SLOTS - 1
+	else: 
+		active_item_slot -= 1
+	
+func get_active_item():
+	return hotbar[active_item_slot][0]

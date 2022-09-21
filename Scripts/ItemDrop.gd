@@ -8,10 +8,25 @@ var item_name
 var player = null
 var being_picked_up = false
 
+var textures = {
+	"Sword": preload("res://Assets/gui/item_icons/sword/sword.png"),
+	"SwordII": preload("res://Assets/gui/item_icons/sword/swordII.png"),
+	"SwordIII": preload("res://Assets/gui/item_icons/sword/swordIII.png"),
+	"SwordIV": preload("res://Assets/gui/item_icons/sword/swordIV.png"),
+	"SwordV": preload("res://Assets/gui/item_icons/sword/swordV.png"),
+	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
+	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
+	"AxeII": preload("res://Assets/gui/item_icons/axeii.png"),
+}
+
+
+signal initItem
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	item_name = "Sword"
-	
+	self.connect("initItem", self, "on_init_item")
+	if item_name == null:
+		item_name = "Redberry"
 func _physics_process(delta):
 	if being_picked_up == true:
 		var direction = global_position.direction_to(player.global_position)
@@ -31,3 +46,8 @@ func pick_up_item(body):
 func play_sound():
 	if !$pickupSound.playing:
 		$pickupSound.play()
+
+func on_init_item(theitemname):
+	item_name = theitemname
+	$Sprite.texture = textures[theitemname]
+	
