@@ -55,6 +55,9 @@ const upper_right_root = 1
 const v_path = 13
 const v_right_path = 18
 const white_flower = 44
+const grass_3 = 59
+const grass_2 = 58
+const grass_1 = 57
 
 const highway_group = [left_highway, upper_highway, right_highway, lower_highway]
 

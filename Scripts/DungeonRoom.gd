@@ -46,7 +46,15 @@ func init(passages):
 	#generating grass
 	for x in range(1, Helper.room_width):
 		for y in range(1, Helper.room_height):
-			$Enviroment/Layer0.set_cell(x, y, MyTileSet.grass, Helper.randomBool(0.1), Helper.randomBool(0.1))
+			var rand = randf()
+			var grass = MyTileSet.grass
+			if rand > 0.4 and rand <= 0.6:
+				grass = MyTileSet.grass_3
+			elif rand > 0.6 and rand <= 0.8:
+				grass = MyTileSet.grass_2
+			elif rand > 0.8 and rand <= 1:
+				grass = MyTileSet.grass_1
+			$Enviroment/Layer0.set_cell(x, y, grass)
 	
 	# Placing the campfire in the middle
 	$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0), MyTileSet.campfire_off)
@@ -55,10 +63,14 @@ func init(passages):
 	if passages[0]:
 		$Enviroment/Layer0.set_cell(0, Helper.room_height / 2, MyTileSet.left_highway)
 		$Enviroment/Layer1.set_cell(1, Helper.room_height / 2, MyTileSet.h_path)
+		for p in range(1, int(Helper.room_width / 2.0) - 1):
+			$Enviroment/Layer1.set_cell(p, Helper.room_height / 2, MyTileSet.h_path)
 		$Enviroment/Layer2.set_cell(1, Helper.room_height / 2, MyTileSet.left_highway_root)
 	if passages[1]:
 		$Enviroment/Layer0.set_cell(Helper.room_width / 2, 0, MyTileSet.upper_highway)
 		$Enviroment/Layer1.set_cell(Helper.room_width / 2, 1, MyTileSet.v_path)
+		for p in range(1, int(Helper.room_height / 2.0) - 1):
+			$Enviroment/Layer1.set_cell(Helper.room_width / 2, p, MyTileSet.v_path)
 		$Enviroment/Layer2.set_cell(Helper.room_width / 2, 1, MyTileSet.upper_highway_root)
 	if passages[2]:
 		$Enviroment/Layer0.set_cell(Helper.room_width, Helper.room_height / 2, MyTileSet.right_highway)
