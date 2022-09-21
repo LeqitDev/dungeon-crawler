@@ -8,6 +8,10 @@ signal drop_item
 var screen_size
 const TileSetManager = preload("res://Scripts/Tiles.gd")
 var ItemDrop = preload("res://Scripts/ItemDrop.gd")
+var Enemy = preload("res://Scenes/Enemy.tscn")
+
+var enemys = 0
+var room_locked = true
 
 
 func init(passages):
@@ -83,19 +87,36 @@ func init(passages):
 		$Enviroment/Layer0.set_cell(Helper.room_width / 2, Helper.room_height, MyTileSet.lower_highway)
 		$Enviroment/Layer1.set_cell(Helper.room_width / 2, Helper.room_height - 1, MyTileSet.v_path)
 		$Enviroment/Layer2.set_cell(Helper.room_width / 2, Helper.room_height - 1, MyTileSet.lower_highway_root)
+	
+	# how many Enemys min. 1 max. 5
+	enemys = (randi() % 4) + 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().root.get_child(0).connect("room_update_done", self, "updateRoomFinished")
 	self.connect("drop_item", self, "on_item_drop_signal")
-	pass
+	
+	# spawn enemys
+	for i in range(enemys):
+		var local_enemy = Enemy.instance()
+		local_enemy.position = Vector2((randi() % 321) + 32, (randi() % 321) + 32)
+		local_enemy.connect("die", self, "on_enemy_dies") # connect with enemy
+		$Enemys.add_child(local_enemy)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func is_room_locked() -> bool:
+	return room_locked
+
 func updateRoomFinished():
 	get_node("Campfire").emit_signal("play_lit_animation", Vector2.ZERO)
+
+func on_enemy_dies(): # enemy dies one enemy less
+	enemys -= 1;
+	if enemys < 1: # no more enemys
+		room_locked = false # unlock room
 
 func on_item_drop_signal(itemname, amount, pos):
 	

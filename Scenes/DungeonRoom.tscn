@@ -36,3 +36,5 @@ format = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
+
+[node name="Enemys" type="Node2D" parent="."]

@@ -5,8 +5,8 @@ extends KinematicBody2D
 
 ## Signals
 
-signal combat(player_pos)
-
+signal combat(player_pos, dmg)
+signal die
 
 ## Variables
 
@@ -246,6 +246,7 @@ func choose_direction():
 func update_health(amount):
 	health += amount # change health
 	if health <= 0:
+		emit_signal("die")
 		queue_free() # enemy dies
 
 func _get_vector_to_player() -> Vector2:
@@ -280,11 +281,11 @@ func get_debug() -> bool:
 
 ## Signal functions
 
-func _on_Node2D_combat(player_pos: Vector2):
+func _on_Node2D_combat(player_pos: Vector2, dmg: int, crit: float = 0.0):
 	knockback = -_get_vector_to_player() * 3
-	update_health(-2)
-#	Helper.randomExec(.26, funcref(self, "update_health"), [-1]) # random +1 (crit or smth like that)
-	get_tree().root.get_node("MainGame/ShakeCamera2D").add_trauma(0.15) # shake camera
+	update_health(-dmg)
+	Helper.randomExec(crit, funcref(self, "update_health"), [-dmg]) # random +1 (crit or smth like that)
+	get_tree().root.get_node("MainGame/ShakeCamera2D").add_trauma(0.2) # shake camera
 	
 	if _is_state(State.ATTACK):
 		_change_state(State.CHASE)

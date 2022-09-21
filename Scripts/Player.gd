@@ -48,7 +48,7 @@ func _input(event):
 	# attack
 	if event.is_action_pressed("ui_mouse_left"):
 		for obj in inside_combat_area:
-			obj.emit_signal("combat", position)
+			obj.emit_signal("combat", position, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
 			$Attack.play()
 	
 	# pick up items
@@ -173,9 +173,10 @@ func _process(delta):
 			var tile_obj = tiles_inside_area_details[tiles_inside_area.find(highway)]
 			interact_signal_objects.append(tile_obj.tilemap.map_to_world(tile_obj.pos))
 			if Input.is_action_just_pressed("ui_interact"): # has highways and "E" pressed
-				var highway_i = MyTileSet.highway_group.find(highway) # get which highway it was left, top, etc
-				get_parent().emit_signal("room_update", Helper.direction_group[highway_i]) # update the room to the new one
-				position = Helper.direction_spawnpoints[highway_i] * 32 + Vector2(16, 8) # set new Player position
+				if !get_parent().get_node("Room").is_room_locked(): # room unlocked
+					var highway_i = MyTileSet.highway_group.find(highway) # get which highway it was left, top, etc
+					get_parent().emit_signal("room_update", Helper.direction_group[highway_i]) # update the room to the new one
+					position = Helper.direction_spawnpoints[highway_i] * 32 + Vector2(16, 8) # set new Player position
 	
 	if interact_signal > 0:
 		gui.emit_signal("key_popup", "E", interact_signal_objects[0], true) # "E" key popup

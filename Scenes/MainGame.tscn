@@ -24,6 +24,7 @@ visible = false
 light_mask = 42
 
 [node name="Node2D" parent="." instance=ExtResource( 5 )]
+visible = false
 position = Vector2( 563.444, 283.714 )
 
 [node name="ShakeCamera2D" type="Camera2D" parent="."]
@@ -33,5 +34,4 @@ script = ExtResource( 6 )
 
 [node name="ItemDrop" parent="." instance=ExtResource( 7 )]
 position = Vector2( 328, 225 )
-
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]
