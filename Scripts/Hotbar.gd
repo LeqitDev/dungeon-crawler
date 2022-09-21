@@ -5,6 +5,8 @@ onready var hotbar = $HotbarContainer
 onready var slots = hotbar.get_children()
 var player_inv = PlayerInventory
 
+signal active_item_updated
+
 func _ready():
 	for i in range(slots.size()):
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
@@ -72,3 +74,6 @@ func close_inventory_holding_item(slot: SlotClass):
 		player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
 		slot.putIntoSlot(find_parent("Control").holding_item)
 		find_parent("Control").holding_item = null
+
+func refresh_style(slot: SlotClass):
+	slot.refresh_style()

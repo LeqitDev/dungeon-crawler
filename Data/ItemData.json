@@ -52,5 +52,11 @@
     "ItemDamage": 0,
     "StackSize": 20,
     "Description": "Berry. Or is it?"
+  },
+  "Coin": {
+    "ItemCategory": "Coin",
+    "ItemDamage": 0,
+    "StackSize": 50,
+    "Description": "A Gold Coin."
   }
 }

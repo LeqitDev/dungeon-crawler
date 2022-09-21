@@ -9,6 +9,8 @@ var screen_size
 const TileSetManager = preload("res://Scripts/Tiles.gd")
 var ItemDrop = preload("res://Scripts/ItemDrop.gd")
 
+var rng = RandomNumberGenerator.new()
+
 
 func init(passages):
 	# generating top and bottom border
@@ -94,22 +96,54 @@ func on_item_drop_signal(itemname, amount, pos):
 			instance.emit_signal("initItem", itemname)
 			instance.position = pos
 	else:
-		var item1 = "Sword"
-		var item2 = "Arrow"
-		var item3 = "Redberry"
-		
-		
-		for n in 3:
+		var items = {
+			1: "Sword",
+			2: "SwordII",
+			3: "SwordIII",
+			4: "SwordIV",
+			5: "SwordV",
+			6: "Arrow",
+			7: "Redberry",
+			8: "Axe",
+			9: "AxeII",
+			10: "AxeIII",
+			11: "AxeIV",
+			12: "AxeV",
+			13: "Coin"
+		}
+		rng.randomize()
+		var value = -1
+		var random_amount = rng.randi()%3+1
+		for n in random_amount:
+			var random_number = rng.randf_range(0, 100)
+			var item = 1
+			
+			if random_number > 95:
+				item = 5
+			elif random_number > 90 and random_number <= 95:
+				item = 4
+			elif random_number > 85 and random_number <= 90:
+				item = 3
+			elif random_number > 75 and random_number <= 85:
+				var other_random = rng.randi()%3+1
+				if other_random == 1:
+					item = 2
+				elif other_random == 2:
+					item = 8
+				elif other_random == 3:
+					item = 7
+			elif random_number > 50 and random_number <= 75:
+				var other_random = rng.randi()%2+1
+				if other_random == 1:
+					item = 1
+				elif other_random == 2:
+					item = 6
+			elif random_number < 50:
+				item = 9
+	
 			var instance = load("res://Scenes/ItemDrop.tscn").instance()
 			self.add_child(instance)
-			if n == 0:
-				instance.emit_signal("initItem", item1)
-				var fixedpos = Vector2(pos.x -30,pos.y)
-				instance.position = fixedpos
-			if n == 1:
-				instance.emit_signal("initItem", item2)
-				instance.position = pos
-			if n == 2:
-				instance.emit_signal("initItem", item3)
-				var fixedpos = Vector2(pos.x +30,pos.y)
-				instance.position = fixedpos
+			instance.emit_signal("initItem", items[item])
+			var fixedpos = Vector2(pos.x + (30*value),pos.y)
+			instance.position = fixedpos
+			value += 1

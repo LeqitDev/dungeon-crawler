@@ -3,21 +3,11 @@ extends Node2D
 
 var item_name
 var item_quantity
-var textures = {
-	"Sword": preload("res://Assets/gui/item_icons/sword/sword.png"),
-	"SwordII": preload("res://Assets/gui/item_icons/sword/swordII.png"),
-	"SwordIII": preload("res://Assets/gui/item_icons/sword/swordIII.png"),
-	"SwordIV": preload("res://Assets/gui/item_icons/sword/swordIV.png"),
-	"SwordV": preload("res://Assets/gui/item_icons/sword/swordV.png"),
-	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
-	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
-	"AxeII": preload("res://Assets/gui/item_icons/axeii.png"),
-}
 
 func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
-	$TextureRect.texture = textures[item_name]
+	$TextureRect.texture = PlayerInventory.textures[item_name]
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:
