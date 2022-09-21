@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/MainGame.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/ShakeCamera2D.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/ItemDrop.tscn" type="PackedScene" id=7]
 
 [node name="MainGame" type="Node2D"]
@@ -14,6 +14,11 @@ layer = 1
 
 [node name="Control" parent="." instance=ExtResource( 2 )]
 follow_viewport_enable = true
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 399.215, 270.535 )
@@ -26,11 +31,6 @@ light_mask = 42
 [node name="Node2D" parent="." instance=ExtResource( 5 )]
 visible = false
 position = Vector2( 563.444, 283.714 )
-
-[node name="ShakeCamera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
-script = ExtResource( 6 )
 
 [node name="ItemDrop" parent="." instance=ExtResource( 7 )]
 position = Vector2( 328, 225 )

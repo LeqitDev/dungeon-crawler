@@ -19,6 +19,8 @@ var inside_area = []
 var interactable_tiles = [MyTileSet.berrybush, MyTileSet.berrybush_empty, MyTileSet.campfire_off] + MyTileSet.highway_group
 var inside_combat_area = []
 
+var can_attack = false
+
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
 
@@ -46,10 +48,11 @@ func _ready():
 
 func _input(event):
 	# attack
-	if event.is_action_pressed("ui_mouse_left"):
+	if event.is_action_pressed("ui_mouse_left") and can_attack:
 		for obj in inside_combat_area:
-			obj.emit_signal("combat", position, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
-			$Attack.play()
+			obj.emit_signal("combat", self, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
+		$AttackCooldown.start(JsonData.item_data[PlayerInventory.get_active_item()]["ItemSpeed"]) # start attack cooldown
+		can_attack = false
 	
 	# pick up items
 	if event.is_action_pressed("pickup"):
@@ -228,5 +231,6 @@ func _on_CombatArea_body_entered(body):
 
 func _on_CombatArea_body_exited(body):
 	inside_combat_area.remove(inside_combat_area.find(body))
-	
 
+func _on_AttackCooldown_ready():
+	can_attack = true

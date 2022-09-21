@@ -85,6 +85,5 @@ texture = ExtResource( 8 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.7, 0.7, 0.7, 1 )
-
 [connection signal="inv_closed" from="Control" to="Control/Inventory" method="_on_Control_inv_closed"]
 [connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]

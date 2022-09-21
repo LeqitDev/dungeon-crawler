@@ -41,6 +41,7 @@ func _init():
 #	OS.window_maximized = false
 	config = Config.new()
 	VisualServer.texture_set_shrink_all_x2_on_set_data(true)
+	VisualServer.set_default_clear_color(Color(0, 0, 0))
 
 func _input(event):
 	if event.is_action_pressed("ui_debug"):

@@ -55,11 +55,11 @@ func init(passages):
 		for y in range(1, Helper.room_height):
 			var rand = randf()
 			var grass = MyTileSet.grass
-			if rand > 0.4 and rand <= 0.6:
+			if rand > 0.6 and rand <= 0.8:
 				grass = MyTileSet.grass_3
-			elif rand > 0.6 and rand <= 0.8:
+			elif rand > 0.8 and rand <= 0.9:
 				grass = MyTileSet.grass_2
-			elif rand > 0.8 and rand <= 1:
+			elif rand > 0.9 and rand <= 1:
 				grass = MyTileSet.grass_1
 			$Enviroment/Layer0.set_cell(x, y, grass)
 	
