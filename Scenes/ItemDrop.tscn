@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/gui/item_icons/redberry.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/ItemDrop.gd" type="Script" id=2]
 [ext_resource path="res://Assets/sounds/pick_up_item.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/partikels/floaty_128.png" type="Texture" id=4]
+[ext_resource path="res://Assets/partikels/floaty_64.png" type="Texture" id=4]
+[ext_resource path="res://Assets/partikels/spotlight_1.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10.5 )
@@ -46,21 +47,30 @@ particles_anim_h_frames = 7
 particles_anim_v_frames = 7
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.380645, 0.774194 )
+colors = PoolColorArray( 0.355469, 0, 0, 1, 0.824707, 0.328594, 0.527718, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+
 [sub_resource type="ParticlesMaterial" id=5]
+next_pass = SubResource( 8 )
 emission_shape = 1
 emission_sphere_radius = 16.0
 flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
-angular_velocity = 300.0
+spread = 180.0
+gravity = Vector3( 0, -100, 0 )
+initial_velocity = 50.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 360.0
 angle_random = 1.0
-
-[sub_resource type="StreamTexture" id=7]
-load_path = "res://.import/spotlight_8 (1).png-da34e1964d6f1df4914dad30a4008ef7.stex"
-
-[sub_resource type="GDScript" id=6]
+color_ramp = SubResource( 7 )
+hue_variation = 0.04
+anim_speed = 1.0
 
 [node name="ItemDrop" type="KinematicBody2D"]
 collision_layer = 64
@@ -86,19 +96,20 @@ anims/RESET = SubResource( 3 )
 stream = ExtResource( 3 )
 volume_db = 1.748
 
+[node name="spotlight" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 0.32549, 0.403922, 1 )
+light_mask = 8
+position = Vector2( 3.8147e-06, 0.999999 )
+scale = Vector2( 0.0584631, 0.0584835 )
+texture = ExtResource( 5 )
+
 [node name="Particles2D" type="Particles2D" parent="."]
 visible = false
 material = SubResource( 4 )
-scale = Vector2( 0.431034, 0.361746 )
-lifetime = 4.0
-speed_scale = 0.2
+position = Vector2( 1.19209e-07, 0 )
+scale = Vector2( 0.177024, 0.209079 )
+amount = 40
+lifetime = 1.5
 process_material = SubResource( 5 )
 texture = ExtResource( 4 )
-
-[node name="Sprite2" type="Sprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
-light_mask = 8
-position = Vector2( 7.62939e-06, 7.62939e-06 )
-scale = Vector2( 0.0891589, 0.116067 )
-texture = SubResource( 7 )
-script = SubResource( 6 )

@@ -96,54 +96,50 @@ func on_item_drop_signal(itemname, amount, pos):
 			instance.emit_signal("initItem", itemname)
 			instance.position = pos
 	else:
-		var items = {
-			1: "Sword",
-			2: "SwordII",
-			3: "SwordIII",
-			4: "SwordIV",
-			5: "SwordV",
-			6: "Arrow",
-			7: "Redberry",
-			8: "Axe",
-			9: "AxeII",
-			10: "AxeIII",
-			11: "AxeIV",
-			12: "AxeV",
-			13: "Coin"
+		var commonItems = {
+			0: "Sword",
+			1: "Coin",
+			2: "Arrow",
+			3: "Axe",
+			4: "Redberry"
 		}
+		
+		var uncommonItems = {
+			0: "SwordII",
+			1: "AxeII"
+		}
+		
+		var rareItems = {
+			1: "SwordIII",
+			2: "AxeIII"
+		}
+		
+		var mythicItems = {
+			1: "SwordIV",
+			2: "AxeIV"
+		}
+		
+		
 		rng.randomize()
 		var value = -1
 		var random_amount = rng.randi()%3+1
 		for n in random_amount:
-			var random_number = rng.randf_range(0, 100)
-			var item = 1
+			var item
 			
-			if random_number > 95:
-				item = 5
-			elif random_number > 90 and random_number <= 95:
-				item = 4
-			elif random_number > 85 and random_number <= 90:
-				item = 3
-			elif random_number > 75 and random_number <= 85:
-				var other_random = rng.randi()%3+1
-				if other_random == 1:
-					item = 2
-				elif other_random == 2:
-					item = 8
-				elif other_random == 3:
-					item = 7
-			elif random_number > 50 and random_number <= 75:
-				var other_random = rng.randi()%2+1
-				if other_random == 1:
-					item = 1
-				elif other_random == 2:
-					item = 6
-			elif random_number < 50:
-				item = 9
-	
+			var length = commonItems.size()
+			var random = rng.randi()%(length)
+			item = commonItems[random]
+
 			var instance = load("res://Scenes/ItemDrop.tscn").instance()
 			self.add_child(instance)
-			instance.emit_signal("initItem", items[item])
-			var fixedpos = Vector2(pos.x + (30*value),pos.y)
+			instance.emit_signal("initItem", item)
+			var fixedpos = Vector2.ZERO
+			if random_amount == 3:
+				fixedpos = Vector2(pos.x + (30*value),pos.y)
+				value += 1
+			elif random_amount == 2:
+				fixedpos = Vector2(pos.x + (15*value),pos.y)
+				value += 2
+			elif random_amount == 1:
+				fixedpos = Vector2(pos.x,pos.y)
 			instance.position = fixedpos
-			value += 1

@@ -45,7 +45,7 @@ func _input(event):
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
 			
-			pickup_item.pick_up_item(self)
+			pickup_item.pick_up_item(self, pickup_item)
 			$PickupZone.items_in_range.erase(pickup_item)
 		
 	if event.is_action_pressed("ui_interact"):
@@ -55,6 +55,22 @@ func _input(event):
 	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
 		if PlayerInventory.get_active_item() != null:
 			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
+			
+			#Rumprobieren mit Particles(einach ignorieren)
+			if PlayerInventory.get_active_item() == "SwordV":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,1,0)
+			elif PlayerInventory.get_active_item() == "SwordIV":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,0,0)
+			elif PlayerInventory.get_active_item() == "SwordIII":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,0,1)
+			elif PlayerInventory.get_active_item() == "SwordII":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,1,0)
+			else:
+				get_node("Sprites/WeaponSprite/Particles2D").visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	

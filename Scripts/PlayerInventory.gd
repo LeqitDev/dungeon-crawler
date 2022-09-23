@@ -24,11 +24,12 @@ var textures = {
 var inventory = {
 	0: ["Arrow", 1], #--> slot_index: [item_name, item_quantity]
 	1: ["Redberry", 5],
-	2: ["Sword", 1],
-	3: ["SwordII", 1],
-	4: ["SwordIII", 1],
-	5: ["SwordIV", 1],
-	6: ["SwordV", 1]
+	2: ["Axe", 1],
+	3: ["AxeII", 1],
+	4: ["AxeIII", 1],
+	5: ["AxeIV", 1],
+	6: ["AxeV", 1],
+	7: ["Coin", 1]
 }
 
 var hotbar = {
