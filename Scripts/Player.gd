@@ -24,17 +24,6 @@ var can_attack = false
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
 
-var textures = {
-	"Sword": preload("res://Assets/gui/item_icons/sword/sword.png"),
-	"SwordII": preload("res://Assets/gui/item_icons/sword/swordII.png"),
-	"SwordIII": preload("res://Assets/gui/item_icons/sword/swordIII.png"),
-	"SwordIV": preload("res://Assets/gui/item_icons/sword/swordIV.png"),
-	"SwordV": preload("res://Assets/gui/item_icons/sword/swordV.png"),
-	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
-	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
-	"AxeII": preload("res://Assets/gui/item_icons/axeii.png"),
-}
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport().size
@@ -58,17 +47,33 @@ func _input(event):
 	if event.is_action_pressed("pickup"):
 		if $PickupZone.items_in_range.size() > 0:
 			var pickup_item = $PickupZone.items_in_range.values()[0]
-			pickup_item.pick_up_item(self)
+			
+			pickup_item.pick_up_item(self, pickup_item)
 			$PickupZone.items_in_range.erase(pickup_item)
 		
 	if event.is_action_pressed("ui_interact"):
 		if BuschGefunden == true:
 			BuschObj.tilemap.set_cell(BuschTilePos.x, BuschTilePos.y, MyTileSet.berrybush_empty)
 			get_parent().get_node("Room").emit_signal("drop_item", "Redberry", 1, Vector2(position.x , position.y - 30))
-	
 	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
 		if PlayerInventory.get_active_item() != null:
-			$Sprites/WeaponSprite.texture = textures[PlayerInventory.get_active_item()]
+			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
+			
+			#Rumprobieren mit Particles(einach ignorieren)
+			if PlayerInventory.get_active_item() == "SwordV":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,1,0)
+			elif PlayerInventory.get_active_item() == "SwordIV":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,0,0)
+			elif PlayerInventory.get_active_item() == "SwordIII":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,0,1)
+			elif PlayerInventory.get_active_item() == "SwordII":
+				get_node("Sprites/WeaponSprite/Particles2D").visible = true
+				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,1,0)
+			else:
+				get_node("Sprites/WeaponSprite/Particles2D").visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Item.gd" type="Script" id=1]
 [ext_resource path="res://Assets/fonts/Silkscreen.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/gui/inventory/item-info.png" type="Texture" id=3]
+[ext_resource path="res://Assets/partikels/spotlight_1.png" type="Texture" id=4]
 
 [node name="Item" type="Node2D"]
 z_index = 1
@@ -16,11 +17,11 @@ z_index = 2
 texture = ExtResource( 3 )
 
 [node name="ItemName" type="Label" parent="ItemInfo"]
-margin_left = -47.5
-margin_top = -32.5
-margin_right = 45.5
-margin_bottom = -11.5
-rect_scale = Vector2( 1.05268, 0.729584 )
+margin_left = -62.0
+margin_top = -34.0
+margin_right = 65.0
+margin_bottom = -13.0
+rect_scale = Vector2( 0.977794, 0.781536 )
 custom_fonts/font = ExtResource( 2 )
 text = "TEST"
 align = 1
@@ -40,7 +41,7 @@ margin_top = -13.75
 margin_right = 42.75
 margin_bottom = 7.25
 rect_scale = Vector2( 0.515628, 0.481077 )
-custom_colors/font_color = Color( 0.639216, 0.0117647, 0.0117647, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Weapon"
 
@@ -100,3 +101,10 @@ margin_bottom = 41.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
 text = "99"
+
+[node name="spotlight" type="Sprite" parent="."]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 17, 14 )
+scale = Vector2( 0.0491429, 0.048043 )
+z_index = -1
+texture = ExtResource( 4 )

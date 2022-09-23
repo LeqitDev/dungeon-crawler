@@ -34,12 +34,40 @@
     "StackSize": 1,
     "Description": "Legendary sword."
   },
+  "Axe": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 4,
+    "ItemSpeed": 0.5,
+    "StackSize": 1,
+    "Description": "Common Axe."
+  },
   "AxeII": {
     "ItemCategory": "Weapon",
     "ItemDamage": 5,
     "ItemSpeed": 0.5,
     "StackSize": 1,
-    "Description": "Pretty impressive Axe."
+    "Description": "Uncommon Axe."
+  },
+  "AxeIII": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 6,
+    "ItemSpeed": 0.5,
+    "StackSize": 1,
+    "Description": "Rare Axe."
+  },
+  "AxeIV": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 7,
+    "ItemSpeed": 0.5,
+    "StackSize": 1,
+    "Description": "Myhtic Axe."
+  },
+  "AxeV": {
+    "ItemCategory": "Weapon",
+    "ItemDamage": 8,
+    "ItemSpeed": 0.5,
+    "StackSize": 1,
+    "Description": "Legendary Axe."
   },
   "Arrow": {
     "ItemCategory": "Projectile",
@@ -52,5 +80,11 @@
     "ItemDamage": 0,
     "StackSize": 20,
     "Description": "Berry. Or is it?"
+  },
+  "Coin": {
+    "ItemCategory": "Coin",
+    "ItemDamage": 0,
+    "StackSize": 50,
+    "Description": "A Gold Coin."
   }
 }

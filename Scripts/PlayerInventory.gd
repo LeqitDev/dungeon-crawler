@@ -5,14 +5,31 @@ const ItemClass = preload("res://Scripts/Item.gd")
 const NUM_INVENTORY_SLOTS = 11
 const NUM_HOTBAR_SLOTS = 2
 
+var textures = {
+	"Sword": preload("res://Assets/gui/item_icons/sword/sword.png"),
+	"SwordII": preload("res://Assets/gui/item_icons/sword/swordII.png"),
+	"SwordIII": preload("res://Assets/gui/item_icons/sword/swordIII.png"),
+	"SwordIV": preload("res://Assets/gui/item_icons/sword/swordIV.png"),
+	"SwordV": preload("res://Assets/gui/item_icons/sword/swordV.png"),
+	"Arrow": preload("res://Assets/gui/item_icons/arrow.png"),
+	"Redberry": preload("res://Assets/gui/item_icons/redberry.png"),
+	"Axe": preload("res://Assets/gui/item_icons/axe/axe.png"),
+	"AxeII": preload("res://Assets/gui/item_icons/axe/axeII.png"),
+	"AxeIII": preload("res://Assets/gui/item_icons/axe/axeIII.png"),
+	"AxeIV": preload("res://Assets/gui/item_icons/axe/axeIV.png"),
+	"AxeV": preload("res://Assets/gui/item_icons/axe/axeV.png"),
+	"Coin": preload("res://Assets/gui/item_icons/coin.png"),
+}
+
 var inventory = {
 	0: ["Arrow", 1], #--> slot_index: [item_name, item_quantity]
 	1: ["Redberry", 5],
-	2: ["Sword", 1],
-	3: ["SwordII", 1],
-	4: ["SwordIII", 1],
-	5: ["SwordIV", 1],
-	6: ["SwordV", 1]
+	2: ["Axe", 1],
+	3: ["AxeII", 1],
+	4: ["AxeIII", 1],
+	5: ["AxeIV", 1],
+	6: ["AxeV", 1],
+	7: ["Coin", 1]
 }
 
 var hotbar = {

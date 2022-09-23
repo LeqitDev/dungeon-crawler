@@ -13,6 +13,8 @@ var Enemy = preload("res://Scenes/Enemy.tscn")
 var enemys = 0
 var room_locked = true
 
+var rng = RandomNumberGenerator.new()
+
 
 func init(passages):
 	# generating top and bottom border
@@ -127,22 +129,50 @@ func on_item_drop_signal(itemname, amount, pos):
 			instance.emit_signal("initItem", itemname)
 			instance.position = pos
 	else:
-		var item1 = "Sword"
-		var item2 = "Arrow"
-		var item3 = "Redberry"
+		var commonItems = {
+			0: "Sword",
+			1: "Coin",
+			2: "Arrow",
+			3: "Axe",
+			4: "Redberry"
+		}
+		
+		var uncommonItems = {
+			0: "SwordII",
+			1: "AxeII"
+		}
+		
+		var rareItems = {
+			1: "SwordIII",
+			2: "AxeIII"
+		}
+		
+		var mythicItems = {
+			1: "SwordIV",
+			2: "AxeIV"
+		}
 		
 		
-		for n in 3:
+		rng.randomize()
+		var value = -1
+		var random_amount = rng.randi()%3+1
+		for n in random_amount:
+			var item
+			
+			var length = commonItems.size()
+			var random = rng.randi()%(length)
+			item = commonItems[random]
+
 			var instance = load("res://Scenes/ItemDrop.tscn").instance()
 			self.add_child(instance)
-			if n == 0:
-				instance.emit_signal("initItem", item1)
-				var fixedpos = Vector2(pos.x -30,pos.y)
-				instance.position = fixedpos
-			if n == 1:
-				instance.emit_signal("initItem", item2)
-				instance.position = pos
-			if n == 2:
-				instance.emit_signal("initItem", item3)
-				var fixedpos = Vector2(pos.x +30,pos.y)
-				instance.position = fixedpos
+			instance.emit_signal("initItem", item)
+			var fixedpos = Vector2.ZERO
+			if random_amount == 3:
+				fixedpos = Vector2(pos.x + (30*value),pos.y)
+				value += 1
+			elif random_amount == 2:
+				fixedpos = Vector2(pos.x + (15*value),pos.y)
+				value += 2
+			elif random_amount == 1:
+				fixedpos = Vector2(pos.x,pos.y)
+			instance.position = fixedpos
