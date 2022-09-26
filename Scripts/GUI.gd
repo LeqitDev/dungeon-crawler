@@ -51,11 +51,5 @@ func _input(event):
 	if event.is_action_pressed("escape"):
 		if $EscapeMenu.visible == false:
 			$EscapeMenu.visible = true
-			for i in get_tree().root.get_node("/root/MainGame/").get_children():
-				if i.get_name() != "Control":
-					i.get_tree().paused = true
-			
 		else:
-			for i in get_tree().root.get_node("/root/MainGame/").get_children():
-				if i.get_name() != "Control":
-					i.get_tree().paused = false
+			$EscapeMenu.visible = false
