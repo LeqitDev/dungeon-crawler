@@ -65,7 +65,15 @@ func init(passages):
 			$Enviroment/Layer0.set_cell(x, y, grass)
 	
 	# Placing the campfire in the middle
-	$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0), MyTileSet.campfire_off)
+	$Enviroment/Layer2.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0), MyTileSet.campfire_off)
+	
+#	$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0), MyTileSet.plaza)
+	var j = 0
+	for y in range(int(Helper.room_height / 2.0) - 1, int(Helper.room_height / 2.0) + 2):
+		for x in range(int(Helper.room_width / 2.0) - 1, int(Helper.room_width / 2.0) + 2):
+			if $Enviroment/Layer1.get_cell(x, y) == -1:
+				$Enviroment/Layer1.set_cell(x, y, MyTileSet.plaza_group[j])
+			j += 1
 	
 	# Creating the Higways left, top, right, bottom
 	if passages[0]:
@@ -73,20 +81,28 @@ func init(passages):
 		$Enviroment/Layer1.set_cell(1, Helper.room_height / 2, MyTileSet.h_path)
 		for p in range(1, int(Helper.room_width / 2.0) - 1):
 			$Enviroment/Layer1.set_cell(p, Helper.room_height / 2, MyTileSet.h_path)
+		$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0) - 1, int(Helper.room_height / 2.0), MyTileSet.plaza_left_path)
 		$Enviroment/Layer2.set_cell(1, Helper.room_height / 2, MyTileSet.left_highway_root)
 	if passages[1]:
 		$Enviroment/Layer0.set_cell(Helper.room_width / 2, 0, MyTileSet.upper_highway)
 		$Enviroment/Layer1.set_cell(Helper.room_width / 2, 1, MyTileSet.v_path)
 		for p in range(1, int(Helper.room_height / 2.0) - 1):
 			$Enviroment/Layer1.set_cell(Helper.room_width / 2, p, MyTileSet.v_path)
+		$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0) - 1, MyTileSet.plaza_upper_path)
 		$Enviroment/Layer2.set_cell(Helper.room_width / 2, 1, MyTileSet.upper_highway_root)
 	if passages[2]:
 		$Enviroment/Layer0.set_cell(Helper.room_width, Helper.room_height / 2, MyTileSet.right_highway)
 		$Enviroment/Layer1.set_cell(Helper.room_width - 1, Helper.room_height / 2, MyTileSet.h_path)
+		for p in range(int(Helper.room_width / 2.0) + 1, Helper.room_width - 1):
+			$Enviroment/Layer1.set_cell(p, Helper.room_height / 2, MyTileSet.h_path)
+		$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0) + 1, int(Helper.room_height / 2.0), MyTileSet.plaza_right_path)
 		$Enviroment/Layer2.set_cell(Helper.room_width - 1, Helper.room_height / 2, MyTileSet.right_highway_root)
 	if passages[3]:
 		$Enviroment/Layer0.set_cell(Helper.room_width / 2, Helper.room_height, MyTileSet.lower_highway)
 		$Enviroment/Layer1.set_cell(Helper.room_width / 2, Helper.room_height - 1, MyTileSet.v_path)
+		for p in range(int(Helper.room_height / 2.0) + 1, Helper.room_height - 1):
+			$Enviroment/Layer1.set_cell(Helper.room_width / 2, p, MyTileSet.v_path)
+		$Enviroment/Layer1.set_cell(int(Helper.room_width / 2.0), int(Helper.room_height / 2.0) + 1, MyTileSet.plaza_lower_path)
 		$Enviroment/Layer2.set_cell(Helper.room_width / 2, Helper.room_height - 1, MyTileSet.lower_highway_root)
 	
 	# how many Enemys min. 1 max. 5

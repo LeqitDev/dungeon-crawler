@@ -58,8 +58,23 @@ const white_flower = 44
 const grass_3 = 59
 const grass_2 = 58
 const grass_1 = 57
+const plaza_upper_left_edge = 61
+const plaza_upper_edge = 62
+const plaza_upper_right_edge = 67
+const plaza_left_edge = 60
+const plaza = 63
+const plaza_right_edge = 66
+const plaza_lower_left_edge = 50
+const plaza_lower_edge = 64
+const plaza_lower_right_edge = 65
+const plaza_lower_path = 10
+const plaza_left_path = 12
+const plaza_right_path = 11
+const plaza_upper_path = 16
+
 
 const highway_group = [left_highway, upper_highway, right_highway, lower_highway]
+const plaza_group = [plaza_upper_left_edge, plaza_upper_edge, plaza_upper_right_edge, plaza_left_edge, plaza, plaza_right_edge, plaza_lower_left_edge, plaza_lower_edge, plaza_lower_right_edge]
 
 class Tile:
 	var tilemap: TileMap
