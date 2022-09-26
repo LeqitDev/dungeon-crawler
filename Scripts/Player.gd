@@ -38,10 +38,12 @@ func _ready():
 func _input(event):
 	# attack
 	if event.is_action_pressed("ui_mouse_left") and can_attack:
-		for obj in inside_combat_area:
-			obj.emit_signal("combat", self, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
-		$AttackCooldown.start(JsonData.item_data[PlayerInventory.get_active_item()]["ItemSpeed"]) # start attack cooldown
-		can_attack = false
+		var inv = get_tree().root.get_node("/root/MainGame/Control/Control/Inventory")
+		if ! inv.visible == true:
+			for obj in inside_combat_area:
+				obj.emit_signal("combat", self, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
+			$AttackCooldown.start(JsonData.item_data[PlayerInventory.get_active_item()]["ItemSpeed"]) # start attack cooldown
+			can_attack = false
 	
 	# pick up items
 	if event.is_action_pressed("pickup"):
@@ -55,7 +57,7 @@ func _input(event):
 		if BuschGefunden == true:
 			BuschObj.tilemap.set_cell(BuschTilePos.x, BuschTilePos.y, MyTileSet.berrybush_empty)
 			get_parent().get_node("Room").emit_signal("drop_item", "Redberry", 1, Vector2(position.x , position.y - 30))
-	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
+	if event.is_action_pressed("change_slot"):
 		if PlayerInventory.get_active_item() != null:
 			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
 			

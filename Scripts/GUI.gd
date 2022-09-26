@@ -44,11 +44,18 @@ func _input(event):
 			_key_popup.visible = false
 
 
-	if event.is_action_pressed("scroll_up"):
-		PlayerInventory.active_item_scroll_up()
+	if event.is_action_pressed("change_slot"):
+		PlayerInventory.active_item_change()
 		$Hotbar.emit_signal("active_item_updated")
-		
 	
-	elif event.is_action_pressed("scroll_down"):
-		PlayerInventory.active_item_scroll_down()
-		$Hotbar.emit_signal("active_item_updated")
+	if event.is_action_pressed("escape"):
+		if $EscapeMenu.visible == false:
+			$EscapeMenu.visible = true
+			for i in get_tree().root.get_node("/root/MainGame/").get_children():
+				if i.get_name() != "Control":
+					i.get_tree().paused = true
+			
+		else:
+			for i in get_tree().root.get_node("/root/MainGame/").get_children():
+				if i.get_name() != "Control":
+					i.get_tree().paused = false

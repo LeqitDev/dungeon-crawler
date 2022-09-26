@@ -2,70 +2,70 @@
   "Sword": {
     "ItemCategory": "Weapon",
     "ItemDamage": 1,
-    "ItemSpeed": 1,
+    "ItemSpeed": 2,
     "StackSize": 1,
     "Description": "Common sword."
   },
   "SwordII": {
     "ItemCategory": "Weapon",
     "ItemDamage": 2,
-    "ItemSpeed": 1,
+    "ItemSpeed": 2,
     "StackSize": 1,
     "Description": "Uncommon sword."
   },
   "SwordIII": {
     "ItemCategory": "Weapon",
     "ItemDamage": 3,
-    "ItemSpeed": 1,
+    "ItemSpeed": 2,
     "StackSize": 1,
     "Description": "Rare sword."
   },
   "SwordIV": {
     "ItemCategory": "Weapon",
     "ItemDamage": 4,
-    "ItemSpeed": 1,
+    "ItemSpeed": 2,
     "StackSize": 1,
     "Description": "Mythic sword."
   },
   "SwordV": {
     "ItemCategory": "Weapon",
     "ItemDamage": 5,
-    "ItemSpeed": 1,
+    "ItemSpeed": 2,
     "StackSize": 1,
     "Description": "Legendary sword."
   },
   "Axe": {
     "ItemCategory": "Weapon",
     "ItemDamage": 4,
-    "ItemSpeed": 0.5,
+    "ItemSpeed": 1,
     "StackSize": 1,
     "Description": "Common Axe."
   },
   "AxeII": {
     "ItemCategory": "Weapon",
     "ItemDamage": 5,
-    "ItemSpeed": 0.5,
+    "ItemSpeed": 1,
     "StackSize": 1,
     "Description": "Uncommon Axe."
   },
   "AxeIII": {
     "ItemCategory": "Weapon",
     "ItemDamage": 6,
-    "ItemSpeed": 0.5,
+    "ItemSpeed": 1,
     "StackSize": 1,
     "Description": "Rare Axe."
   },
   "AxeIV": {
     "ItemCategory": "Weapon",
     "ItemDamage": 7,
-    "ItemSpeed": 0.5,
+    "ItemSpeed": 1,
     "StackSize": 1,
     "Description": "Myhtic Axe."
   },
   "AxeV": {
     "ItemCategory": "Weapon",
     "ItemDamage": 8,
-    "ItemSpeed": 0.5,
+    "ItemSpeed": 1,
     "StackSize": 1,
     "Description": "Legendary Axe."
   },
