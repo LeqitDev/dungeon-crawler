@@ -9,6 +9,7 @@ var screen_size
 const TileSetManager = preload("res://Scripts/Tiles.gd")
 var ItemDrop = preload("res://Scripts/ItemDrop.gd")
 var Enemy = preload("res://Scenes/Enemy.tscn")
+var Chest = preload("res://Scenes/Chest.tscn")
 
 var enemys = 0
 var room_locked = true
@@ -57,12 +58,10 @@ func init(passages):
 		for y in range(1, Helper.room_height):
 			var rand = randf()
 			var grass = MyTileSet.grass
-			if rand > 0.6 and rand <= 0.8:
-				grass = MyTileSet.grass_3
-			elif rand > 0.8 and rand <= 0.9:
-				grass = MyTileSet.grass_2
-			elif rand > 0.9 and rand <= 1:
+			if rand > 0.94 and rand <= 0.99:
 				grass = MyTileSet.grass_1
+			elif rand > 0.99 and rand <= 1:
+				grass = MyTileSet.grass_3
 			$Enviroment/Layer0.set_cell(x, y, grass)
 	
 	# Placing the campfire in the middle
@@ -119,6 +118,9 @@ func on_enemy_dies(): # enemy dies one enemy less
 	enemys -= 1;
 	if enemys < 1: # no more enemys
 		room_locked = false # unlock room
+		var chest = Chest.instance()
+		chest.position = get_tree().root.get_node("MainGame/Player").get_position()
+		add_child(chest)
 
 func on_item_drop_signal(itemname, amount, pos):
 	

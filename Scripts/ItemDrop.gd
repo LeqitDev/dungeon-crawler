@@ -25,7 +25,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		
 		var distance = global_position.distance_to(player.global_position)
-		if distance < 4:
+		if distance < 10:
 			PlayerInventory.add_item(item_name, 1)
 			queue_free()
 	velocity = move_and_slide(velocity, Vector2.UP)

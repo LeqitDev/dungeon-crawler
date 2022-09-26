@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/StartButton.gd" type="Script" id=1]
 [ext_resource path="res://Assets/fonts/Silkscreen.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/gui/button_normal_styleboxtexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/gui/button_hover_styleboxtexture.tres" type="StyleBox" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -12,9 +14,11 @@ margin_right = 461.0
 margin_bottom = 322.0
 
 [node name="Start" type="Button" parent="Container"]
-margin_right = 68.0
-margin_bottom = 27.0
+margin_right = 200.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 200, 50 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Start"
 script = ExtResource( 1 )
@@ -24,6 +28,8 @@ margin_top = 75.0
 margin_right = 200.0
 margin_bottom = 125.0
 rect_min_size = Vector2( 200, 50 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "SETTINGS"
 script = ExtResource( 1 )
@@ -33,10 +39,12 @@ margin_top = 150.0
 margin_right = 200.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 50 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 script = ExtResource( 1 )
-
+[connection signal="mouse_entered" from="Container/Start" to="Container/Start" method="_on_Start_mouse_entered"]
 [connection signal="pressed" from="Container/Start" to="Container/Start" method="_on_Button_pressed"]
 [connection signal="pressed" from="Container/Settings" to="Container/Settings" method="_on_Button_pressed"]
 [connection signal="pressed" from="Container/Button3" to="Container/Button3" method="_on_Button_pressed"]

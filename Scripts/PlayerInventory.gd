@@ -73,7 +73,7 @@ func add_item_to_empty_slot(item: ItemClass, slot: SlotClass, is_hotbar: bool = 
 
 func remove_item(slot: SlotClass, is_hotbar: bool = false):
 	if is_hotbar:
-		hotbar.erase(slot.slot_index)
+		hotbar[slot.slot_index] = null
 	else:
 		inventory.erase(slot.slot_index)
 	
@@ -93,4 +93,4 @@ func active_item_scroll_down():
 		active_item_slot -= 1
 	
 func get_active_item():
-	return hotbar[active_item_slot][0]
+	return hotbar[active_item_slot][0] if hotbar[active_item_slot] != null else null

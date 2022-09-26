@@ -16,6 +16,8 @@ extends Node2D
 
 var noise = OpenSimplexNoise.new()
 #var tiles = null
+var max_flowers = 4
+var cur_flowers = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,15 +35,17 @@ func _ready():
 			
 			var point_noise = noise.get_noise_2d(x, y)
 			generateTileAtPosition(x, y, point_noise)
-	pass # Replace with function body.
 
 func generateTileAtPosition(x: int, y: int, noise: float):
 	if noise < 0.3: return
 	if noise < 0.375:
+		if cur_flowers > max_flowers:
+			return
 		if Helper.randomBool(0.26): # 25%
 			generateFlowerGroup(x, y, MyTileSet.white_flower)
 		else: # 75%
 			generateFlowerGroup(x, y, MyTileSet.blue_flower)
+		cur_flowers += 1
 	else:
 		if Helper.randomBool(0.2): MyTileSet.setCell($Layer2, x, y, MyTileSet.berrybush) # bush with berries
 		else: MyTileSet.setCell($Layer2, x, y, MyTileSet.berrybush_empty) # bush without berries
@@ -52,12 +56,16 @@ func generateFlowerGroup(x: int, y: int, tile: int):
 			if isTileAtPos(x_i, y_i): continue
 			var distance = sqrt(pow(x_i - x, 2) + pow(y_i - y, 2))
 			if distance == 0:
-				MyTileSet.setCell($Layer2, x_i, y_i, tile) # in the center just place flower
+				setFlower(x_i, y_i, tile) # in the center just place flower
 				return
 			if distance == 1:
-				Helper.randomExec(0.31, funcref(MyTileSet, "setCell"), [$Layer2, x_i, y_i, tile]) # cross with possibility of 30% flower
+				Helper.randomExec(0.31, funcref(self, "setFlower"), [x_i, y_i, tile]) # cross with possibility of 30% flower
 			else:
-				Helper.randomExec(0.16, funcref(MyTileSet, "setCell"), [$Layer2, x_i, y_i, tile]) # diagonal with possibility of 15% flower
+				Helper.randomExec(0.16, funcref(self, "setFlower"), [x_i, y_i, tile]) # diagonal with possibility of 15% flower
+
+func setFlower(x: int, y: int, tile: int):
+	MyTileSet.setCell($Layer2, x, y, tile)
+	MyTileSet.setCell($Layer0, x, y, MyTileSet.grass_2)
 
 func isTileAtPos(x: int, y: int):
 	return ($Layer1.get_cell(x, y) != -1 or $Layer2.get_cell(x, y) != -1)

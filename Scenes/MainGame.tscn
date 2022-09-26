@@ -34,26 +34,30 @@ visible = false
 position = Vector2( 563.444, 283.714 )
 
 [node name="ItemDrop" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 328, 225 )
 
 [node name="Chest3" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 186, 309 )
 collision_layer = 0
 collision_mask = 128
 
 [node name="Chest4" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 190, 359 )
 collision_layer = 0
 collision_mask = 128
 
 [node name="Chest2" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 279, 343 )
 collision_layer = 0
 collision_mask = 128
 
 [node name="Chest" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 282, 304 )
 collision_layer = 0
 collision_mask = 128
-
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]

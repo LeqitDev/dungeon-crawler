@@ -39,9 +39,15 @@ tracks/0/keys = {
 [sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
-glow_intensity = 1.0
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/3 = false
+glow_levels/6 = true
+glow_levels/7 = true
+glow_intensity = 2.0
 glow_strength = 0.95
-glow_blend_mode = 0
+glow_blend_mode = 1
+glow_bicubic_upscale = true
 
 [node name="Campfire" type="Node2D"]
 light_mask = 8
@@ -52,7 +58,7 @@ scale = Vector2( 1e-05, 1e-05 )
 enabled = false
 texture = ExtResource( 3 )
 color = Color( 0.882353, 0.721569, 0.454902, 1 )
-range_item_cull_mask = 42
+range_item_cull_mask = 43
 shadow_enabled = true
 shadow_gradient_length = 10.0
 shadow_filter = 2

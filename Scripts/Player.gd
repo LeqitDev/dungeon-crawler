@@ -34,14 +34,31 @@ func _ready():
 	value = randi() % MAX_VALUE
 	noise.period = 16
 	
+	#Rumprobieren mit Particles(einach ignorieren)
+	if PlayerInventory.get_active_item() == "SwordV":
+		get_node("Sprites/WeaponSprite/Particles2D").visible = true
+		get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,1,0)
+	elif PlayerInventory.get_active_item() == "SwordIV":
+		get_node("Sprites/WeaponSprite/Particles2D").visible = true
+		get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,0,0)
+	elif PlayerInventory.get_active_item() == "SwordIII":
+		get_node("Sprites/WeaponSprite/Particles2D").visible = true
+		get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,0,1)
+	elif PlayerInventory.get_active_item() == "SwordII":
+		get_node("Sprites/WeaponSprite/Particles2D").visible = true
+		get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,1,0)
+	else:
+		get_node("Sprites/WeaponSprite/Particles2D").visible = false
+	
 
 func _input(event):
 	# attack
 	if event.is_action_pressed("ui_mouse_left") and can_attack:
 		for obj in inside_combat_area:
 			obj.emit_signal("combat", self, JsonData.item_data[PlayerInventory.get_active_item()]["ItemDamage"])
-		$AttackCooldown.start(JsonData.item_data[PlayerInventory.get_active_item()]["ItemSpeed"]) # start attack cooldown
-		can_attack = false
+		if PlayerInventory.get_active_item() != null:
+			$AttackCooldown.start(JsonData.item_data[PlayerInventory.get_active_item()]["ItemSpeed"]) # start attack cooldown
+			can_attack = false
 	
 	# pick up items
 	if event.is_action_pressed("pickup"):
@@ -58,22 +75,6 @@ func _input(event):
 	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
 		if PlayerInventory.get_active_item() != null:
 			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
-			
-			#Rumprobieren mit Particles(einach ignorieren)
-			if PlayerInventory.get_active_item() == "SwordV":
-				get_node("Sprites/WeaponSprite/Particles2D").visible = true
-				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,1,0)
-			elif PlayerInventory.get_active_item() == "SwordIV":
-				get_node("Sprites/WeaponSprite/Particles2D").visible = true
-				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,0,0)
-			elif PlayerInventory.get_active_item() == "SwordIII":
-				get_node("Sprites/WeaponSprite/Particles2D").visible = true
-				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(0,0,1)
-			elif PlayerInventory.get_active_item() == "SwordII":
-				get_node("Sprites/WeaponSprite/Particles2D").visible = true
-				get_node("Sprites/WeaponSprite/Particles2D").modulate = Color(1,1,0)
-			else:
-				get_node("Sprites/WeaponSprite/Particles2D").visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	

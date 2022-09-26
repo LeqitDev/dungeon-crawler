@@ -19,3 +19,7 @@ func _ready():
 func _on_Button_pressed():
 	get_tree().change_scene("res://Scenes/MainGame.tscn")
 	
+
+
+func _on_Start_mouse_entered():
+	pass # Replace with function body.

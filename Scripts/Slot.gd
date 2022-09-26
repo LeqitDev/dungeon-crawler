@@ -50,7 +50,7 @@ func refresh_style():
 		set('custom_styles/panel', default_style)
 
 
-func pickFromSolt():
+func pickFromSlot():
 	remove_child(item)
 	var inventoryNode = find_parent("Control")
 	inventoryNode.add_child(item)

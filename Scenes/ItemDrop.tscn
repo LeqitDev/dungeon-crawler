@@ -47,17 +47,17 @@ particles_anim_h_frames = 7
 particles_anim_v_frames = 7
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.380645, 0.774194 )
 colors = PoolColorArray( 0.355469, 0, 0, 1, 0.824707, 0.328594, 0.527718, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
 
 [sub_resource type="ParticlesMaterial" id=8]
-
-[sub_resource type="ParticlesMaterial" id=5]
-next_pass = SubResource( 8 )
+next_pass = SubResource( 7 )
 emission_shape = 1
 emission_sphere_radius = 16.0
 flag_disable_z = true
@@ -68,7 +68,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 360.0
 angle_random = 1.0
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 6 )
 hue_variation = 0.04
 anim_speed = 1.0
 
@@ -111,5 +111,5 @@ position = Vector2( 1.19209e-07, 0 )
 scale = Vector2( 0.177024, 0.209079 )
 amount = 40
 lifetime = 1.5
-process_material = SubResource( 5 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )

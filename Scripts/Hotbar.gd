@@ -46,8 +46,8 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 	player_inv.remove_item(slot)
 	player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
 	var temp_item = slot.item
-	slot.pickFromSolt()
-	temp_item.global_position = event.global_position
+	slot.pickFromSlot()
+	temp_item.global_position = Vector2(get_global_mouse_position().x -16, get_global_mouse_position().y -16)
 	slot.putIntoSlot(find_parent("Control").holding_item)
 	find_parent("Control").holding_item = temp_item
 	
@@ -66,8 +66,8 @@ func left_click_same_item(slot: SlotClass):
 func left_click_not_holding(slot: SlotClass):
 	player_inv.remove_item(slot, true)
 	find_parent("Control").holding_item = slot.item
-	slot.pickFromSolt()
-	find_parent("Control").holding_item.global_position = get_global_mouse_position()
+	slot.pickFromSlot()
+	find_parent("Control").holding_item.global_position = Vector2(get_global_mouse_position().x -16, get_global_mouse_position().y -16)
 	
 func close_inventory_holding_item(slot: SlotClass):
 	if find_parent("Control").holding_item != null:

@@ -42,7 +42,13 @@ func _input(event):
 			emit_signal("inv_closed")
 		if _key_popup.visible == true:
 			_key_popup.visible = false
-
+	
+	if event.is_action_pressed("ui_cancel"):
+		if $Inventory.visible == true:
+			$Inventory.visible = !$Inventory.visible
+			$Inventory.initialize_inventory()
+			$InventoryOpen.play()
+			emit_signal("inv_closed")
 
 	if event.is_action_pressed("scroll_up"):
 		PlayerInventory.active_item_scroll_up()
