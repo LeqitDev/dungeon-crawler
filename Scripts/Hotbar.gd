@@ -41,6 +41,7 @@ func left_click_empty_slot(slot: SlotClass):
 	player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
 	slot.putIntoSlot(find_parent("Control").holding_item)
 	find_parent("Control").holding_item = null
+	player_inv.player.emit_signal("update_player_right_hand", player_inv.textures[slot.item.item_name])
 	
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	player_inv.remove_item(slot)
@@ -50,6 +51,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 	temp_item.global_position = Vector2(get_global_mouse_position().x -16, get_global_mouse_position().y -16)
 	slot.putIntoSlot(find_parent("Control").holding_item)
 	find_parent("Control").holding_item = temp_item
+	player_inv.player.emit_signal("update_player_right_hand", player_inv.textures[slot.item.item_name])
 	
 func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])

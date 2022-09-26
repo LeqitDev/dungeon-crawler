@@ -61,3 +61,4 @@ position = Vector2( 282, 304 )
 collision_layer = 0
 collision_mask = 128
 [connection signal="room_update" from="." to="." method="_on_MainGame_room_update"]
+[connection signal="update_player_right_hand" from="Player" to="Player" method="_on_Player_update_player_right_hand"]

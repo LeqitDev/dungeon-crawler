@@ -38,6 +38,10 @@ var hotbar = {
 }
 
 var active_item_slot = 0
+var player = null
+
+func set_player(player):
+	self.player = player
 
 func add_item(item_name, item_quantity):
 	for item in inventory:

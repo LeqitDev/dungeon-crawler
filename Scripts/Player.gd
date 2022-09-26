@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal lit_torch
+signal update_player_right_hand(texture)
 
 # playerspeed (movement)
 export var speed = 400
@@ -23,6 +24,9 @@ var can_attack = false
 
 # get gui screen
 onready var gui = get_parent().get_node("Control/Control")
+
+func _init():
+	PlayerInventory.set_player(self)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,7 +78,8 @@ func _input(event):
 			get_parent().get_node("Room").emit_signal("drop_item", "Redberry", 1, Vector2(position.x , position.y - 30))
 	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
 		if PlayerInventory.get_active_item() != null:
-			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
+			emit_signal("update_player_right_hand", PlayerInventory.textures[PlayerInventory.get_active_item()])
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -240,3 +245,7 @@ func _on_CombatArea_body_exited(body):
 
 func _on_AttackCooldown_ready():
 	can_attack = true
+
+
+func _on_Player_update_player_right_hand(texture):
+	$Sprites/WeaponSprite.texture = texture
