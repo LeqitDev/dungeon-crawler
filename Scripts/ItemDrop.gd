@@ -36,8 +36,7 @@ func pick_up_item(body, posbody):
 	play_sound()
 
 func play_sound():
-	if !$pickupSound.playing:
-		$pickupSound.play()
+	$pickupSound.play()
 
 func on_init_item(theitemname):
 	item_name = theitemname

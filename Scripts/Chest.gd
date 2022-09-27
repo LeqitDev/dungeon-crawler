@@ -21,5 +21,5 @@ func pick_up_item(body, theposbody):
 	if !is_opened:
 		$Sprite.texture =  textures["Chest_empty"]
 		$openSound.play()
-		get_parent().get_node("Room").emit_signal("drop_item", "chest", 1, Vector2(posbody.position.x , posbody.position.y - 20))
+		get_tree().root.get_node("/root/MainGame/Room").emit_signal("drop_item", "chest", 1, Vector2(posbody.position.x , posbody.position.y - 20))
 		is_opened = true

@@ -37,7 +37,7 @@ var hotbar = {
 	1: ["SwordIV", 1]
 }
 
-var active_item_slot = 1
+var active_item_slot = 0
 
 func add_item(item_name, item_quantity):
 	for item in inventory:

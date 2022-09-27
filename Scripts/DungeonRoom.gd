@@ -119,6 +119,9 @@ func on_enemy_dies(): # enemy dies one enemy less
 	enemys -= 1;
 	if enemys < 1: # no more enemys
 		room_locked = false # unlock room
+		var instance = load("res://Scenes/Chest.tscn").instance()
+		self.add_child(instance)
+		instance.position = Vector2(380 , 270)
 
 func on_item_drop_signal(itemname, amount, pos):
 	

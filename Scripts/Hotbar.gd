@@ -38,18 +38,24 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				find_parent("Control").initial_slot = slot
 
 func left_click_empty_slot(slot: SlotClass):
-	player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
-	slot.putIntoSlot(find_parent("Control").holding_item)
-	find_parent("Control").holding_item = null
+	var holding_item = find_parent("Control").holding_item.get_item_name()
+	var holding_item_category = JsonData.item_data[holding_item]["ItemCategory"]
+	if holding_item_category == "Weapon":
+		player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
+		slot.putIntoSlot(find_parent("Control").holding_item)
+		find_parent("Control").holding_item = null
 	
 func left_click_different_item(event: InputEvent, slot: SlotClass):
-	player_inv.remove_item(slot)
-	player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
-	var temp_item = slot.item
-	slot.pickFromSolt()
-	temp_item.global_position = event.global_position
-	slot.putIntoSlot(find_parent("Control").holding_item)
-	find_parent("Control").holding_item = temp_item
+	var holding_item = find_parent("Control").holding_item.get_item_name()
+	var holding_item_category = JsonData.item_data[holding_item]["ItemCategory"]
+	if holding_item_category == "Weapon":
+		player_inv.remove_item(slot)
+		player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
+		var temp_item = slot.item
+		slot.pickFromSolt()
+		temp_item.global_position = event.global_position
+		slot.putIntoSlot(find_parent("Control").holding_item)
+		find_parent("Control").holding_item = temp_item
 	
 func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])

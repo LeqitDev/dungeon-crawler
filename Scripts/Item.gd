@@ -46,6 +46,9 @@ func toggle_item_info(iteminfo, itemname):
 		
 	else:
 		$ItemInfo.visible = false
+
+func get_item_name():
+	return item_name;
 		
 func change_item_name(itemname, this_categorie):
 	get_node("ItemInfo/ItemName").text = str(itemname)

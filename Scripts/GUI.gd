@@ -42,11 +42,6 @@ func _input(event):
 			emit_signal("inv_closed")
 		if _key_popup.visible == true:
 			_key_popup.visible = false
-
-
-	if event.is_action_pressed("change_slot"):
-		PlayerInventory.active_item_change()
-		$Hotbar.emit_signal("active_item_updated")
 	
 	if event.is_action_pressed("escape"):
 		if $EscapeMenu.visible == false:

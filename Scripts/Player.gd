@@ -58,6 +58,7 @@ func _input(event):
 			BuschObj.tilemap.set_cell(BuschTilePos.x, BuschTilePos.y, MyTileSet.berrybush_empty)
 			get_parent().get_node("Room").emit_signal("drop_item", "Redberry", 1, Vector2(position.x , position.y - 30))
 	if event.is_action_pressed("change_slot"):
+		PlayerInventory.active_item_change()
 		if PlayerInventory.get_active_item() != null:
 			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
 			
