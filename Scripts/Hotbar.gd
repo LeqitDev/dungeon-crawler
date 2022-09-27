@@ -5,16 +5,16 @@ onready var hotbar = $HotbarContainer
 onready var slots = hotbar.get_children()
 var player_inv = PlayerInventory
 
-signal active_item_updated
+signal update_visual
 
 func _ready():
 	for i in range(slots.size()):
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
 		
 		slots[i].slot_index = i
 		slots[i].slot_type = SlotClass.SlotType.HOTBAR
 	initialize_hotbar()
+	self.connect("update_visual", self, "update_visual")
 		
 func initialize_hotbar():
 	for i in range(slots.size()):
@@ -44,6 +44,7 @@ func left_click_empty_slot(slot: SlotClass):
 		player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
 		slot.putIntoSlot(find_parent("Control").holding_item)
 		find_parent("Control").holding_item = null
+		get_parent().get_parent().get_parent().get_node("Player").update_active_item_texture()
 	
 func left_click_different_item(event: InputEvent, slot: SlotClass):
 	var holding_item = find_parent("Control").holding_item.get_item_name()
@@ -56,6 +57,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("Control").holding_item)
 		find_parent("Control").holding_item = temp_item
+		get_parent().get_parent().get_parent().get_node("Player").update_active_item_texture()
 	
 func left_click_same_item(slot: SlotClass):
 	var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
@@ -82,4 +84,12 @@ func close_inventory_holding_item(slot: SlotClass):
 		find_parent("Control").holding_item = null
 
 func refresh_style(slot: SlotClass):
+	print("refreshed")
 	slot.refresh_style()
+
+
+
+func _on_Hotbar_update_visual():
+	for i in range(slots.size()):
+		if PlayerInventory.hotbar.has(i):
+			slots[i].refresh_style()

@@ -34,6 +34,7 @@ func _ready():
 	
 	
 	
+	
 #	if randi() % 2 == 0:
 #		item = ItemClass.instance()
 #		add_child(item)
@@ -41,9 +42,9 @@ func _ready():
 
 func refresh_style():
 	if SlotType.HOTBAR == slot_type and PlayerInventory.active_item_slot == slot_index:
-		set('custom_styles/panel', selected_style)
-	elif SlotType.HOTBAR == slot_type and PlayerInventory.active_item_slot != slot_index:
 		set('custom_styles/panel', hotbar_style)
+	elif SlotType.HOTBAR == slot_type and PlayerInventory.active_item_slot != slot_index:
+		set('custom_styles/panel', selected_style)
 	elif item == null:
 		set('custom_styles/panel', empty_style)
 	else:
