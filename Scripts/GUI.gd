@@ -17,7 +17,7 @@ func _ready():
 	add_child(_key_popup)
 	pass # Replace with function body.
 
-
+	update_stat_visual()
 
 
 func _on_Control_key_popup(key:String, player:Vector2, show:bool):
@@ -46,6 +46,16 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if $Inventory.visible == true:
 			$Inventory.visible = !$Inventory.visible
-			$Inventory.initialize_inventory()
 			$InventoryOpen.play()
 			emit_signal("inv_closed")
+		else:
+			if $EscapeMenu.visible == false:
+				$EscapeMenu.visible = true
+			else:
+				$EscapeMenu.visible = false
+
+
+func update_stat_visual():
+	get_node("Stats/Container/AttackDamage").text = str(PlayerInventory.stats["Attack"])
+	get_node("Stats/Container2/Speed").text = str(PlayerInventory.stats["Speed"])
+	get_node("Stats/Container3/AttackSpeed").text = str(PlayerInventory.stats["AttackSpeed"])

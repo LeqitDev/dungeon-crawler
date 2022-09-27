@@ -8,6 +8,8 @@ func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
 	$TextureRect.texture = PlayerInventory.textures[item_name]
+	var category = JsonData.item_data[item_name]["ItemCategory"]
+	update_spotlight(item_name, category)
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:
@@ -108,3 +110,15 @@ func change_category_color(this_category):
 	for i in yellow:
 		if this_category == yellow[i]:
 			get_node("ItemInfo/ItemType").set("custom_colors/font_color", Color(1,1,0))
+
+
+func update_spotlight(itemname, categorie):
+	if categorie == "Weapon":
+		if itemname.ends_with("IV"):
+			$spotlight.modulate = Color(1,0,0)
+		elif itemname.ends_with("V"):
+			$spotlight.modulate = Color(1,1,0)
+		elif itemname.ends_with("III"):
+			$spotlight.modulate = Color(0,0,1)
+		elif itemname.ends_with("II"):
+			$spotlight.modulate = Color(0,1,0)

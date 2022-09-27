@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_tileset.png-7571f0c28faf676bec5d01eca6eb9284.stex"
+path="res://.import/speed-gui.png-a2dfaf2e1954576feef434dd718ec7e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/gui_tileset.png"
-dest_files=[ "res://.import/gui_tileset.png-7571f0c28faf676bec5d01eca6eb9284.stex" ]
+source_file="res://Assets/gui/stats/speed-gui.png"
+dest_files=[ "res://.import/speed-gui.png-a2dfaf2e1954576feef434dd718ec7e7.stex" ]
 
 [params]
 

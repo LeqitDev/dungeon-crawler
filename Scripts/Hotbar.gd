@@ -53,7 +53,7 @@ func left_click_different_item(event: InputEvent, slot: SlotClass):
 		player_inv.remove_item(slot)
 		player_inv.add_item_to_empty_slot(find_parent("Control").holding_item, slot, true)
 		var temp_item = slot.item
-		slot.pickFromSolt()
+		slot.pickFromSlot()
 		temp_item.global_position = event.global_position
 		slot.putIntoSlot(find_parent("Control").holding_item)
 		find_parent("Control").holding_item = temp_item

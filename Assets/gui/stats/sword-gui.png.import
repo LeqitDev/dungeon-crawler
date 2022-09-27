@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_tileset.png-7571f0c28faf676bec5d01eca6eb9284.stex"
+path="res://.import/sword-gui.png-06471e86ee04ba3632312c65796bd5b9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesets/gui_tileset.png"
-dest_files=[ "res://.import/gui_tileset.png-7571f0c28faf676bec5d01eca6eb9284.stex" ]
+source_file="res://Assets/gui/stats/sword-gui.png"
+dest_files=[ "res://.import/sword-gui.png-06471e86ee04ba3632312c65796bd5b9.stex" ]
 
 [params]
 

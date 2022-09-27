@@ -34,7 +34,8 @@ func _process(delta):
 	mid_y = -6 if mid_y < -6 else mid_y
 	mid_y = 6 if mid_y > 6 else mid_y
 	var inv = get_tree().root.get_node("/root/MainGame/Control/Control/Inventory")
-	if ! inv.visible == true:
+	var esc = get_tree().root.get_node("/root/MainGame/Control/Control/EscapeMenu")
+	if  inv.visible != true and esc.visible != true:
 		global_position = global_position.linear_interpolate(-Vector2(mid_x,mid_y), interpolate_val * delta)
 
 func shake():

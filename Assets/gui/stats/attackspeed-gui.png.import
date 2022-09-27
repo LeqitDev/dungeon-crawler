@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/simple-button.png-04e4344bbe4665fa417a783106fbb8a9.stex"
+path="res://.import/attackspeed-gui.png-a27a09e94531fa03e8ac8fe669b0603f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gui/buttons/simple-button.png"
-dest_files=[ "res://.import/simple-button.png-04e4344bbe4665fa417a783106fbb8a9.stex" ]
+source_file="res://Assets/gui/stats/attackspeed-gui.png"
+dest_files=[ "res://.import/attackspeed-gui.png-a27a09e94531fa03e8ac8fe669b0603f.stex" ]
 
 [params]
 

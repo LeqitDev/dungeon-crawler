@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/StartButton.gd" type="Script" id=1]
 [ext_resource path="res://Assets/fonts/Silkscreen.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/gui/buttons/button_normal_styleboxtexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/gui/buttons/button_hover_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/gui/buttons/button_pressed_styleboxtexture.tres" type="StyleBox" id=5]
 
 [node name="Node2D" type="Node2D"]
 light_mask = 8
@@ -18,6 +21,9 @@ margin_right = 68.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 200, 50 )
 custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
 text = "Continue"
 script = ExtResource( 1 )
 
@@ -27,6 +33,9 @@ margin_right = 200.0
 margin_bottom = 125.0
 rect_min_size = Vector2( 200, 50 )
 custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
 text = "SETTINGS"
 script = ExtResource( 1 )
 
@@ -36,6 +45,9 @@ margin_right = 200.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 50 )
 custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
 text = "Quit"
 script = ExtResource( 1 )
 

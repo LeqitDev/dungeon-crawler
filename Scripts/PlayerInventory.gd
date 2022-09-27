@@ -21,6 +21,12 @@ var textures = {
 	"Coin": preload("res://Assets/gui/item_icons/coin.png"),
 }
 
+var stats = {
+	"Speed": 400,
+	"Attack": 1,
+	"AttackSpeed": 1,
+} 
+
 var inventory = {
 	0: ["Arrow", 1], #--> slot_index: [item_name, item_quantity]
 	1: ["Redberry", 5],
