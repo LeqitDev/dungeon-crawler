@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/sounds/inventory_open.wav" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/gui/hotbar/playerhud_normal.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/EscapeMenu.tscn" type="PackedScene" id=9]
 
 [node name="Control" type="CanvasLayer"]
 
@@ -83,7 +84,12 @@ margin_right = 80.0
 margin_bottom = 464.0
 texture = ExtResource( 8 )
 
+[node name="EscapeMenu" parent="Control" instance=ExtResource( 9 )]
+visible = false
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.7, 0.7, 0.7, 1 )
+
 [connection signal="inv_closed" from="Control" to="Control/Inventory" method="_on_Control_inv_closed"]
 [connection signal="key_popup" from="Control" to="Control" method="_on_Control_key_popup"]
+[connection signal="update_visual" from="Control/Hotbar" to="Control/Hotbar" method="_on_Hotbar_update_visual"]

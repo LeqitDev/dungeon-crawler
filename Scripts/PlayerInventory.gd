@@ -34,7 +34,7 @@ var inventory = {
 
 var hotbar = {
 	0: ["Sword", 1],
-	1: ["Arrow", 1]
+	1: ["SwordIV", 1]
 }
 
 var active_item_slot = 0
@@ -87,14 +87,11 @@ func add_item_quantity(slot: SlotClass, quantity_to_add: int, is_hotbar: bool = 
 	else:
 		inventory[slot.slot_index][1] += quantity_to_add
 
-func active_item_scroll_up():
-	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
-	
-func active_item_scroll_down():
+func active_item_change():
 	if active_item_slot == 0:
-		active_item_slot = NUM_HOTBAR_SLOTS - 1
-	else: 
-		active_item_slot -= 1
+		active_item_slot = 1
+	else:
+		active_item_slot = 0
 	
 func get_active_item():
 	return hotbar[active_item_slot][0] if hotbar[active_item_slot] != null else null

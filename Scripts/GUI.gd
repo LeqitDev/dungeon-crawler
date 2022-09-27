@@ -49,12 +49,3 @@ func _input(event):
 			$Inventory.initialize_inventory()
 			$InventoryOpen.play()
 			emit_signal("inv_closed")
-
-	if event.is_action_pressed("scroll_up"):
-		PlayerInventory.active_item_scroll_up()
-		$Hotbar.emit_signal("active_item_updated")
-		
-	
-	elif event.is_action_pressed("scroll_down"):
-		PlayerInventory.active_item_scroll_down()
-		$Hotbar.emit_signal("active_item_updated")

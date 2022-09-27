@@ -135,7 +135,7 @@ func on_enemy_dies(): # enemy dies one enemy less
 	if enemys < 1: # no more enemys
 		room_locked = false # unlock room
 		var chest = Chest.instance()
-		chest.position = get_tree().root.get_node("MainGame/Player").get_position()
+		chest.position = Vector2(380 , 270) # get_tree().root.get_node("MainGame/Player").get_position()
 		add_child(chest)
 
 func on_item_drop_signal(itemname, amount, pos):
