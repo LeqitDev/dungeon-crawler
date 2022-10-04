@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gui/inv_button_texture.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/gui/stats/sword-gui.png" type="Texture" id=11]
 [ext_resource path="res://Assets/gui/stats/speed-gui.png" type="Texture" id=12]
 [ext_resource path="res://Assets/gui/stats/attackspeed-gui.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/CardSelection.tscn" type="PackedScene" id=14]
 
 [node name="Control" type="CanvasLayer"]
 
@@ -20,6 +21,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+
+[node name="CardSelection" parent="Control" instance=ExtResource( 14 )]
+visible = false
 
 [node name="Inventory" parent="Control" instance=ExtResource( 5 )]
 visible = false

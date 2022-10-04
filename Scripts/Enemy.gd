@@ -244,6 +244,7 @@ func choose_direction():
 	chosen_dir = chosen_dir.normalized()
 
 func update_health(amount):
+	$AnimationPlayer.play()
 	health += amount # change health
 	if health <= 0:
 		emit_signal("die")

@@ -21,7 +21,6 @@ script = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 399.215, 270.535 )
-speed = 200
 
 [node name="Rain" parent="." instance=ExtResource( 1 )]
 visible = false

@@ -101,3 +101,6 @@ func active_item_change():
 	
 func get_active_item():
 	return hotbar[active_item_slot][0] if hotbar[active_item_slot] != null else null
+
+func set_stat(stat, value):
+	stats[stat] = value

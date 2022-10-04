@@ -4,7 +4,7 @@ signal lit_torch
 signal update_player_right_hand(texture)
 
 # playerspeed (movement)
-export var speed = 400
+export var speed = 200
 var screen_size
 
 # torch flicker
@@ -30,6 +30,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	speed = 200
 	screen_size = get_viewport().size
 	
 	get_tree().root.get_child(0).connect("room_update_done", self, "updateRoomFinished")
@@ -251,3 +252,7 @@ func _on_AttackCooldown_ready():
 func update_active_item_texture():
 	if PlayerInventory.get_active_item() != null:
 			$Sprites/WeaponSprite.texture = PlayerInventory.textures[PlayerInventory.get_active_item()]
+
+
+func update_speed(value):
+	speed = value
